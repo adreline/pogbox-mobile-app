@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:forceDarkAllowed="false"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/dht_model2"
+        android:layout_width="35dp"
+        android:layout_height="71dp"
+        android:layout_marginBottom="4dp"
+        android:contentDescription="Ideogram of a DHT sensor"
+        app:layout_constraintBottom_toTopOf="@+id/growbox_model"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.148"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/dht_model" />
+
+    <include
+        android:id="@+id/include2"
+        layout="@layout/toolbar" />
+
+    <ImageView
+        android:id="@+id/growbox_model"
+        android:layout_width="307dp"
+        android:layout_height="568dp"
+        android:contentDescription="@string/placeholder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.824"
+        app:srcCompat="@drawable/box_model" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="138dp"
+        android:layout_height="151dp"
+        android:contentDescription="Growbox ideogram"
+        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
+        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
+        app:layout_constraintStart_toStartOf="@+id/growbox_model"
+        app:layout_constraintTop_toBottomOf="@+id/growlight_shine"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/plant_model" />
+
+    <ImageView
+        android:id="@+id/chasiss_model"
+        android:layout_width="49dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
+        app:layout_constraintEnd_toStartOf="@+id/chasiss_model2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/growbox_model"
+        app:layout_constraintTop_toTopOf="@+id/growlight_model"
+        app:layout_constraintVertical_bias="0.949"
+        app:srcCompat="@drawable/fan_chassi" />
+
+    <ImageView
+        android:id="@+id/chasiss_model2"
+        android:layout_width="49dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
+        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
+        app:layout_constraintHorizontal_bias="0.329"
+        app:layout_constraintStart_toStartOf="@+id/growbox_model"
+        app:layout_constraintTop_toTopOf="@+id/growbox_model"
+        app:layout_constraintVertical_bias="0.949"
+        app:srcCompat="@drawable/fan_chassi" />
+
+    <ImageView
+        android:id="@+id/growlight_shine"
+        android:layout_width="193dp"
+        android:layout_height="187dp"
+        android:layout_marginTop="8dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
+        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
+        app:layout_constraintStart_toStartOf="@+id/growbox_model"
+        app:layout_constraintTop_toBottomOf="@+id/growlight_switch"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/shine" />
+
+    <TextView
+        android:id="@+id/dst_data"
+        android:layout_width="68dp"
+        android:layout_height="19dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/placeholder"
+        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
+        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
+        app:layout_constraintHorizontal_bias="0.671"
+        app:layout_constraintStart_toEndOf="@+id/dht_data"
+        app:layout_constraintTop_toBottomOf="@+id/dst_model"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/dht_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/placeholder"
+        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
+        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
+        app:layout_constraintHorizontal_bias="0.251"
+        app:layout_constraintStart_toStartOf="@+id/growbox_model"
+        app:layout_constraintTop_toBottomOf="@+id/dht_model"
+        app:layout_constraintVertical_bias="0.004" />
+
+    <TextView
+        android:id="@+id/dht_data2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/placeholder"
+        app:layout_constraintBottom_toTopOf="@+id/growbox_model"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/dht_model2"
+        app:layout_constraintTop_toBottomOf="@+id/include2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/growlight_model"
+        android:layout_width="215dp"
+        android:layout_height="234dp"
+        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
+        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="@+id/growbox_model"
+        app:layout_constraintTop_toTopOf="@+id/growbox_model"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/lamp_model" />
+
+    <ImageView
+        android:id="@+id/dst_model"
+        android:layout_width="69dp"
+        android:layout_height="76dp"
+        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
+        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
+        app:layout_constraintHorizontal_bias="0.806"
+        app:layout_constraintStart_toStartOf="@+id/growbox_model"
+        app:layout_constraintTop_toBottomOf="@+id/growlight_model"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/dst_model" />
+
+    <ImageView
+        android:id="@+id/dht_model"
+        android:layout_width="37dp"
+        android:layout_height="79dp"
+        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
+        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
+        app:layout_constraintHorizontal_bias="0.249"
+        app:layout_constraintStart_toStartOf="@+id/growbox_model"
+        app:layout_constraintTop_toBottomOf="@+id/growlight_model"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/dht_model" />
+
+    <Switch
+        android:id="@+id/growlight_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/growlight_model"
+        app:layout_constraintEnd_toEndOf="@+id/growlight_model"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="@+id/growlight_model"
+        app:layout_constraintTop_toTopOf="@+id/growbox_model"
+        app:layout_constraintVertical_bias="0.763"
+        tools:ignore="DuplicateSpeakableTextCheck" />
+
+    <ImageView
+        android:id="@+id/intake_fan_model_1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/chasiss_model2"
+        app:layout_constraintEnd_toEndOf="@+id/chasiss_model2"
+        app:layout_constraintStart_toStartOf="@+id/chasiss_model2"
+        app:layout_constraintTop_toTopOf="@+id/chasiss_model2"
+        app:srcCompat="@drawable/fan_blades" />
+
+    <ImageView
+        android:id="@+id/intake_fan_model_2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/chasiss_model"
+        app:layout_constraintEnd_toEndOf="@+id/chasiss_model"
+        app:layout_constraintStart_toStartOf="@+id/chasiss_model"
+        app:layout_constraintTop_toTopOf="@+id/chasiss_model"
+        app:srcCompat="@drawable/fan_blades" />
+
+    <ImageView
+        android:id="@+id/chasiss_model3"
+        android:layout_width="51dp"
+        android:layout_height="52dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
+        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
+        app:layout_constraintHorizontal_bias="0.944"
+        app:layout_constraintStart_toStartOf="@+id/growbox_model"
+        app:layout_constraintTop_toTopOf="@+id/growbox_model"
+        app:layout_constraintVertical_bias="0.019"
+        app:srcCompat="@drawable/fan_chassi"
+        android:contentDescription="TODO" />
+
+    <ImageView
+        android:id="@+id/exhaust_fan_model"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/chasiss_model3"
+        app:layout_constraintEnd_toEndOf="@+id/chasiss_model3"
+        app:layout_constraintStart_toStartOf="@+id/chasiss_model3"
+        app:layout_constraintTop_toTopOf="@+id/chasiss_model3"
+        app:srcCompat="@drawable/fan_blades"
+        android:contentDescription="TODO" />
+
+    <Switch
+        android:id="@+id/exhaust_fan_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
+        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
+        app:layout_constraintHorizontal_bias="0.945"
+        app:layout_constraintStart_toStartOf="@+id/growbox_model"
+        app:layout_constraintTop_toBottomOf="@+id/chasiss_model3"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/refresh_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.89"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.939"
+        app:srcCompat="@drawable/ic_baseline_refresh_24" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

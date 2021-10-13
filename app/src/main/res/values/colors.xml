@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="coffee_200">#FFE8D6</color>
+    <color name="coffee_500">#DDBEA9</color>
+    <color name="coffee_700">#CB997E</color>
+    <color name="vegetation_200">#B7B7A4</color>
+    <color name="vegetation_500">#A5A58D</color>
+    <color name="vegetation_700">#6B705C</color>
+    <color name="black">#081c15</color>
+    <color name="white">#faf9f9</color>
+</resources>

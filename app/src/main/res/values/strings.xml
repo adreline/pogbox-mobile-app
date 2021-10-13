@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Pog Box</string>
+    <string name="crontab">Crontab</string>
+    <string name="cpu_temp">CPU Temp</string>
+    <string name="dht_ambient">DHT (Ambient)</string>
+    <string name="placeholder">N/A</string>
+    <string name="harmonogram_n_wiat_a">Harmonogram\nŚwiatła</string>
+    <string name="server_memory">Server memory</string>
+    <string name="database_size">Database Size</string>
+    <string name="dht_growbox">DHT (Growbox)</string>
+    <string name="uruchom_o_godzinie">Uruchom o godzinie:</string>
+    <string name="zapisz">Zapisz</string>
+    <string name="debug_info">Debug info</string>
+    <string name="wy_cz_o_godzinie">Wyłącz o godzinie:</string>
+    <string name="dst">DST</string>
+    <string name="wykres_ostatnich_10_godzin">Wykres ostatnich 10 godzin</string>
+    <string name="statystyki">Statystyki</string>
+</resources>
