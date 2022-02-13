@@ -1,13 +1,7 @@
 package com.example.pogbox.growboxapi
 
-import com.example.pogbox.growboxapi.Constants.Companion.DHT2_URL
-import com.example.pogbox.growboxapi.Constants.Companion.DHT_URL
-import com.example.pogbox.growboxapi.Constants.Companion.DST_URL
-import com.example.pogbox.growboxapi.Constants.Companion.EXH_URL
-import com.example.pogbox.growboxapi.Constants.Companion.GET_SCHEDULE_URL
-import com.example.pogbox.growboxapi.Constants.Companion.GL_URL
-import com.example.pogbox.growboxapi.Constants.Companion.SERVER_INFO
-import com.example.pogbox.growboxapi.Constants.Companion.SET_SCHEDULE_URL
+import android.content.SharedPreferences
+
 import com.example.pogbox.sensors.DhtModel
 import com.example.pogbox.sensors.DstModel
 import com.example.pogbox.sensors.ServerInfoModel
@@ -16,8 +10,18 @@ import java.io.IOException
 import com.google.gson.GsonBuilder
 
 
-class GrowboxApi {
+class GrowboxApi(shared: SharedPreferences) {
+    //constructor of this class loads server addresses and paths from global settings
+    var DHT2_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("DHT2_URL" , "/" )}"
+    var DHT_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("DHT_URL" , "/" )}"
+    var DST_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("DST_URL" , "/" )}"
+    var EXH_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("EXH_URL" , "/" )}"
+    var GET_SCHEDULE_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("GET_SCHEDULE_URL" , "/" )}"
+    var GL_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("GL_URL" , "/" )}"
+    var SERVER_INFO = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("SERVER_INFO" , "/" )}"
+    var SET_SCHEDULE_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("SET_SCHEDULE_URL" , "/" )}"
 
+    //local variables declarations
     private var dst_state=""
     private var dht_state=""
     private var dht2_state=""

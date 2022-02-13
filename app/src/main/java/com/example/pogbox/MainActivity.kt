@@ -1,6 +1,8 @@
 package com.example.pogbox
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -28,6 +30,7 @@ class justAnUi(val api: GrowboxApi,
 
 }
 class MainActivity : AppCompatActivity() {
+    lateinit var shared : SharedPreferences//this is a global settings instance
     //  ---------------DATA DECLARATIONS--------------
     var growlight_switch_flag=false //important sht, basicly when refresh button refreshes switch state, it shouldnt trigger the listener
     var exhaust_switch_flag=false //important sht, basicly when refresh button refreshes switch state, it shouldnt trigger the listener
@@ -35,10 +38,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        shared = getSharedPreferences("default" , Context.MODE_PRIVATE)//this loads global settings under name of default
         //class that holds all ui references being thrown around
         val just_ui = justAnUi(
-            GrowboxApi(),
+            GrowboxApi(shared),
             findViewById<TextView>(R.id.dht_data),
             findViewById<TextView>(R.id.dht_data2),
             findViewById<TextView>(R.id.dst_data),

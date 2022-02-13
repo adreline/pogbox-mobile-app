@@ -1,6 +1,8 @@
 package com.example.pogbox
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,10 +13,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.pogbox.growboxapi.ApiScheduler
-import com.example.pogbox.growboxapi.Constants.Companion.DHT2_URL
-import com.example.pogbox.growboxapi.Constants.Companion.DHT_URL
-import com.example.pogbox.growboxapi.Constants.Companion.DST_URL
-import com.example.pogbox.growboxapi.Constants.Companion.SERVER_INFO
 import com.example.pogbox.growboxapi.GrowboxApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -23,18 +21,27 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SettingsActivity : AppCompatActivity() {
+    lateinit var shared : SharedPreferences//this is a global settings instance
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-
-        val api = GrowboxApi() //create service object
+        shared = getSharedPreferences("default" , Context.MODE_PRIVATE)//this loads global settings under name of default
+        /*
+        import com.example.pogbox.growboxapi.Constants.Companion.DHT2_URL
+        import com.example.pogbox.growboxapi.Constants.Companion.DHT_URL
+        import com.example.pogbox.growboxapi.Constants.Companion.DST_URL
+        import com.example.pogbox.growboxapi.Constants.Companion.SERVER_INFO
+         */
+        val api = GrowboxApi(shared) //create service object
 
         //toolbars
-        var toolbar_back_button = findViewById<AppCompatImageView>(R.id.toolbar_back_button)
+        val toolbar_back_button = findViewById<AppCompatImageView>(R.id.toolbar_back_button)
         findViewById<AppCompatImageView>(R.id.toolbar_settings_button).visibility = View.GONE
         findViewById<TextView>(R.id.toolbar_title).text="Ustawienia"
         //other
         val save_schedule_button = findViewById<Button>(R.id.save_schedule_button)
+        val save_server_ip_button = findViewById<Button>(R.id.server_address_ip_commit)
+        val ip_input = findViewById<EditText>(R.id.server_ip_address_input)
         val turnon_time = findViewById<EditText>(R.id.turnon_time)
         val turnoff_time = findViewById<EditText>(R.id.turnoff_time)
         val content3 = findViewById<TextView>(R.id.content3)
@@ -46,10 +53,10 @@ class SettingsActivity : AppCompatActivity() {
         val content6 = findViewById<TextView>(R.id.content6)
         //sync data
         api.getGrowlightSchedule()
-        api.updateData(DHT_URL)
-        api.updateData(DHT2_URL)
-        api.updateData(DST_URL)
-        api.updateData(SERVER_INFO)
+        api.updateData(api.DHT_URL)
+        api.updateData(api.DHT2_URL)
+        api.updateData(api.DST_URL)
+        api.updateData(api.SERVER_INFO)
 
         //set up UI
         CoroutineScope(IO).launch{
@@ -69,6 +76,12 @@ class SettingsActivity : AppCompatActivity() {
                 delay(10)
             }
             runOnUiThread{ content4.text = api.getSpaceInfo() }
+        }
+        CoroutineScope(IO).launch{
+            val old_address = shared.getString("ADDRESS" , "0.0.0.0" )
+            runOnUiThread{
+                ip_input.setText(old_address)
+            }
         }
         CoroutineScope(IO).launch{
             while(api.getCrontab()==""){
@@ -109,6 +122,13 @@ class SettingsActivity : AppCompatActivity() {
             val tof = turnoff_time.text.toString()
             api.setGrowlightSchedule(ton,tof)
             showToast("Harmonogram wysłany")
+        }
+        save_server_ip_button?.setOnClickListener{
+            val new_server_ip = ip_input.text.toString()
+            val edit = shared.edit() //this sets settings instance to edit mode
+            edit.putString("ADDRESS",new_server_ip)
+            edit.apply() //this saves configuration
+            showToast("IP Zapisane")
         }
         //UI listeners
         toolbar_back_button?.setOnClickListener{
