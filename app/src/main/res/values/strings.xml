@@ -1,4 +1,9 @@
 <resources>
+    <string-array name="ip_array">
+        <item>172.29.44.116</item>
+        <item>192.168.1.16</item>
+    </string-array>
+
     <string name="app_name">Pog Box</string>
     <string name="crontab">Crontab</string>
     <string name="cpu_temp">CPU Temp</string>
