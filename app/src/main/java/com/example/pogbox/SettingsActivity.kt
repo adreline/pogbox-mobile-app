@@ -30,6 +30,7 @@ class SettingsActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.toolbar_title).text="Ustawienia"
         //other
         val save_server_ip_button = findViewById<ImageButton>(R.id.server_address_ip_commit)
+        val goto_boxlayout_button = findViewById<Button>(R.id.goto_boxlayout_button)
         val ip_input = findViewById<EditText>(R.id.server_ip_address_input)
         findViewById<TextView>(R.id.content3)
         val content2 = findViewById<TextView>(R.id.content2)
@@ -91,7 +92,10 @@ class SettingsActivity : AppCompatActivity() {
             runOnUiThread { content2.text = api.getDht2()+"\n"+api.getDht2Update() }
         }
         //listeners
-
+        goto_boxlayout_button?.setOnClickListener{
+            val intent = Intent(this, BoxLayoutActivity::class.java)
+            startActivity(intent)
+        }
         save_server_ip_button?.setOnClickListener{
             val new_server_ip = ip_input.text.toString()
             val edit = settings.edit() //this sets settings instance to edit mode

@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Server IP Address"
+                android:text="@string/server_ip_address"
                 android:textColor="@color/White" />
 
             <LinearLayout
@@ -70,6 +70,29 @@
                     android:src="@drawable/save_icon" />
 
             </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/rozmieszczenie_element_w_w_growbox_sie"
+                android:textColor="@color/White" />
+
+            <Button
+                android:id="@+id/goto_boxlayout_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/growbox" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
