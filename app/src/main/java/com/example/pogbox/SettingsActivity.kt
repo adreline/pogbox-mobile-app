@@ -20,7 +20,7 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         settings = getSharedPreferences("default" , Context.MODE_PRIVATE)//this loads global settings under name of default
-
+        //
 
         val api = GrowboxApi(settings) //create service object
 
@@ -31,7 +31,13 @@ class SettingsActivity : AppCompatActivity() {
         //other
         val save_server_ip_button = findViewById<ImageButton>(R.id.server_address_ip_commit)
         val goto_boxlayout_button = findViewById<Button>(R.id.goto_boxlayout_button)
-        val ip_input = findViewById<EditText>(R.id.server_ip_address_input)
+        val ip_input = findViewById<AutoCompleteTextView>(R.id.server_ip_address_input)
+        //enable autocomplete for ip input
+        val countries: Array<out String> = resources.getStringArray(R.array.ip_array)
+        ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries).also { adapter ->
+            ip_input.setAdapter(adapter)
+        }
+
         findViewById<TextView>(R.id.content3)
         val content2 = findViewById<TextView>(R.id.content2)
         val Content1 = findViewById<TextView>(R.id.Content1)
