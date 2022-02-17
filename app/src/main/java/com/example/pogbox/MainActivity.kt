@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         val dst_button = findViewById<ConstraintLayout>(R.id.dst_button)
         val exhaust_settings_button = findViewById<LinearLayout>(R.id.exhaust_settings_button)
         val lamp_settings_button = findViewById<LinearLayout>(R.id.lamp_settings_button)
+        val server_status_button = findViewById<LinearLayout>(R.id.server_status_button)
         //animate the static fan images
         just_ui.spin.interpolator = LinearInterpolator()
         //toolbar buttons
@@ -120,6 +121,9 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, DeviceDetailsActivity::class.java)
             intent.putExtra("device","LAMP")
             startActivity(intent)
+        }
+        server_status_button?.setOnClickListener{
+            showToast("Ostatnia aktualizacja: ${just_ui.api.getDhtUpdate()}")
         }
     }
     //  ---------------FUNCTIONS DECLARATIONS--------------
