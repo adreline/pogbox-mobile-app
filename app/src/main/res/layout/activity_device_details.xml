@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Main"
+    tools:context=".DeviceDetailsActivity">
+
+    <include
+        android:id="@+id/include2"
+        layout="@layout/toolbar" />
+
+    <Switch
+        android:id="@+id/device_switch"
+        android:layout_width="60dp"
+        android:layout_height="52dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout6"
+        app:layout_constraintEnd_toStartOf="@+id/device_name_input"
+        app:layout_constraintHorizontal_bias="0.26"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include2"
+        app:layout_constraintVertical_bias="0.29000002" />
+
+    <EditText
+        android:id="@+id/device_name_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/White"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:text="@string/placeholder"
+        android:textColor="@color/White"
+        app:layout_constraintBottom_toTopOf="@+id/lamp_model"
+        app:layout_constraintEnd_toEndOf="@+id/lamp_model"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/lamp_model"
+        app:layout_constraintTop_toBottomOf="@+id/include2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nazwa_urz_dzenia"
+        android:textColor="@color/White"
+        app:layout_constraintBottom_toTopOf="@+id/device_name_input"
+        app:layout_constraintEnd_toEndOf="@+id/device_name_input"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/device_name_input"
+        app:layout_constraintTop_toBottomOf="@+id/include2" />
+
+    <ImageView
+        android:id="@+id/lamp_model"
+        android:layout_width="240dp"
+        android:layout_height="134dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.89"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include2"
+        app:layout_constraintVertical_bias="0.19"
+        app:srcCompat="@drawable/lamp_model_on" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lamp_model"
+        app:layout_constraintVertical_bias="1.0">
+
+        <TextView
+            android:id="@+id/main_window_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/harmonogram_n_wiat_a"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.10" />
+
+        <LinearLayout
+            android:id="@+id/schedule_input_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_window_label">
+
+            <TextView
+                android:id="@+id/from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/from"
+                android:textColor="@color/Text_light"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/from_time_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="5"
+                android:inputType="time"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <TextView
+                android:id="@+id/untill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/untill"
+                android:textColor="@color/Text_light"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/untill_time_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="5"
+                android:inputType="time"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/save_schedule_button_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/Button"
+            android:text="@string/zapisz"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/schedule_input_layout"
+            app:layout_constraintStart_toStartOf="@+id/schedule_input_layout"
+            app:layout_constraintTop_toBottomOf="@+id/schedule_input_layout"
+            tools:ignore="TextContrastCheck" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/sub_window"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/rounded_corner_background_darker"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/save_schedule_button_2">
+
+            <TextView
+                android:id="@+id/sub_window_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/dodatkowe"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.1" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/zasilanie"
+        android:textColor="@color/White"
+        app:layout_constraintBottom_toTopOf="@+id/device_switch"
+        app:layout_constraintEnd_toEndOf="@+id/device_switch"
+        app:layout_constraintStart_toStartOf="@+id/device_switch"
+        tools:ignore="TextContrastCheck" />
+
+    <ImageView
+        android:id="@+id/fan_blades"
+        android:layout_width="124dp"
+        android:layout_height="136dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/fan_chassi"
+        app:layout_constraintEnd_toEndOf="@+id/fan_chassi"
+        app:layout_constraintStart_toStartOf="@+id/fan_chassi"
+        app:layout_constraintTop_toTopOf="@+id/fan_chassi"
+        app:srcCompat="@drawable/fan_blades" />
+
+    <ImageView
+        android:id="@+id/fan_chassi"
+        android:layout_width="147dp"
+        android:layout_height="152dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/lamp_model"
+        app:layout_constraintEnd_toEndOf="@+id/lamp_model"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="@+id/lamp_model"
+        app:layout_constraintTop_toTopOf="@+id/lamp_model"
+        app:srcCompat="@drawable/fan_chassi" />
+
+    <ImageButton
+        android:id="@+id/save_name_button_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:backgroundTint="@color/Button"
+        android:padding="15dp"
+        android:src="@drawable/save_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/device_name_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/device_name_input"
+        app:layout_constraintTop_toTopOf="@+id/device_name_input" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

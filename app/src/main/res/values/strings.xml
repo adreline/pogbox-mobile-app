@@ -4,7 +4,7 @@
     <string name="cpu_temp">CPU Temp</string>
     <string name="dht_ambient">DHT (Ambient)</string>
     <string name="placeholder">N/A</string>
-    <string name="harmonogram_n_wiat_a">Harmonogram\nŚwiatła</string>
+    <string name="harmonogram_n_wiat_a">Harmonogram Światła</string>
     <string name="server_memory">Server memory</string>
     <string name="database_size">Database Size</string>
     <string name="dht_growbox">DHT (Growbox)</string>
@@ -15,4 +15,19 @@
     <string name="dst">DST</string>
     <string name="wykres_ostatnich_10_godzin">Wykres ostatnich 10 godzin</string>
     <string name="statystyki">Statystyki</string>
+    <string name="rednia_temp_dzi">Średnia temp. dziś</string>
+    <string name="rednia_wilg_dzi">Średnia wilg. dziś</string>
+    <string name="urz_dzenia">Urządzenia</string>
+    <string name="nazwa_urz_dzenia">Nazwa urządzenia</string>
+    <string name="dodatkowe">Dodatkowe</string>
+    <string name="from">Od</string>
+    <string name="zasilanie">Zasilanie</string>
+    <string name="untill">Do</string>
+    <string name="name_placeholder">Name</string>
+    <string name="odczyt_temp">Odczyt temp.</string>
+    <string name="wykresy">Wykresy</string>
+    <string name="save_button">Save Button</string>
+    <string name="odczyt_wilg">Odczyt wilg.</string>
+    <string name="ostatnie_10_godzin">Ostatnie 10 godzin</string>
+    <string name="sensor_ideogram">Sensor ideogram</string>
 </resources>

@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/MainToolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/MainToolbar"
-    android:background="@color/vegetation_200">
+    android:background="@color/Main">
     <!--  this is main constrained layout, all other layouts are inside -->
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#168BC34A"
+        android:background="@color/Main"
         tools:context=".MainActivity">
         <!-- this is another layout, idk why -->
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@color/Main"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -29,21 +30,27 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/toolbar_back_button"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:scaleX="1.3"
+                    android:scaleY="1.3"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.19999999"
                     app:srcCompat="@drawable/ic_baseline_arrow_back_24"
-                    app:tint="@color/vegetation_700" />
+                    app:tint="@color/Text" />
 
                 <TextView
                     android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:ellipsize="end"
+                    android:maxLength="22"
+                    android:maxLines="1"
                     android:text="Pog Box"
-                    android:textColor="@color/vegetation_700"
-                    android:textColorLink="@color/vegetation_700"
+                    android:textColor="@color/Text"
+                    android:textColorLink="@color/Text"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/toolbar_settings_button"
@@ -55,12 +62,14 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/toolbar_settings_button"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_marginEnd="16dp"
+                    android:scaleX="1.3"
+                    android:scaleY="1.3"
+                    android:textColor="@color/Text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0"
                     app:srcCompat="@drawable/ic_baseline_settings_24" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -69,8 +78,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 </androidx.appcompat.widget.Toolbar>

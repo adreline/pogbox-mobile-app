@@ -13,7 +13,11 @@
         android:theme="@style/Theme.Growbox"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".DeviceDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".SensorDetailsActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

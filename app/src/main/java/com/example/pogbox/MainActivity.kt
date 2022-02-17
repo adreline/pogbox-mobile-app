@@ -11,61 +11,65 @@ import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
 import android.widget.*
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.pogbox.growboxapi.ApiScheduler
 import com.example.pogbox.growboxapi.GrowboxApi
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 
+//this class holds all labels that can be set by user
+class uiLabels(val dht1_label: TextView,
+               val dht2_label: TextView,
+               val dst_label: TextView,
+               val lamp_label: TextView,
+               val exhaust_label: TextView,
+)
+
 //class that holds all ui references thrown around
 class justAnUi(val api: GrowboxApi,
-               val dht_data: TextView,
-               val dht2_data: TextView,
-               val dst_data: TextView,
-               val growlight_shine: ImageView,
-               val growlight_switch: Switch,
+               val srednia_temp: TextView,
+               val srednia_wilgoc: TextView,
+               val lamp_model: ImageView,
                val exhaust_fan: ImageView,
-               val exhaust_fan_switch:Switch,
-               val spin: Animation){
+               val spin: Animation,
+               val connection_model: ImageView)
 
-}
 class MainActivity : AppCompatActivity() {
-    lateinit var shared : SharedPreferences//this is a global settings instance
-    //  ---------------DATA DECLARATIONS--------------
-    var growlight_switch_flag=false //important sht, basicly when refresh button refreshes switch state, it shouldnt trigger the listener
-    var exhaust_switch_flag=false //important sht, basicly when refresh button refreshes switch state, it shouldnt trigger the listener
+    private lateinit var shared : SharedPreferences//this is a global settings instance
     //  ---------------ON CREATE (MAIN PROG)--------------
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         shared = getSharedPreferences("default" , Context.MODE_PRIVATE)//this loads global settings under name of default
+        //load custom labels
+        loadCustomLabels(shared)
         //class that holds all ui references being thrown around
         val just_ui = justAnUi(
             GrowboxApi(shared),
-            findViewById<TextView>(R.id.dht_data),
-            findViewById<TextView>(R.id.dht_data2),
-            findViewById<TextView>(R.id.dst_data),
-            findViewById<ImageView>(R.id.growlight_shine),
-            findViewById<Switch>(R.id.growlight_switch),
-            findViewById<ImageView>(R.id.exhaust_fan_model),
-            findViewById<Switch>(R.id.exhaust_fan_switch),
-            AnimationUtils.loadAnimation(this,R.anim.spinny)
+            findViewById(R.id.srednia_temp),
+            findViewById(R.id.srednia_wilgoc),
+            findViewById(R.id.lamp_model_2),
+            findViewById(R.id.exhaust_fan_model),
+            AnimationUtils.loadAnimation(this,R.anim.spinny),
+            findViewById(R.id.connection_model)
         )
+
         val refresh_button = findViewById<FloatingActionButton>(R.id.refresh_button)
-        val dht1_model = findViewById<ImageView>(R.id.dht_model)
-        val dht2_model = findViewById<ImageView>(R.id.dht_model2)
-        val dst_model = findViewById<ImageView>(R.id.dst_model)
+        val dht1_button = findViewById<ConstraintLayout>(R.id.dht1_button)
+        val dht2_button = findViewById<ConstraintLayout>(R.id.dht2_button)
+        val dst_button = findViewById<ConstraintLayout>(R.id.dst_button)
+        val exhaust_settings_button = findViewById<LinearLayout>(R.id.exhaust_settings_button)
+        val lamp_settings_button = findViewById<LinearLayout>(R.id.lamp_settings_button)
         //animate the static fan images
-        just_ui.spin.setInterpolator(LinearInterpolator())
-        findViewById<ImageView>(R.id.intake_fan_model_1).startAnimation(just_ui.spin)
-        findViewById<ImageView>(R.id.intake_fan_model_2).startAnimation(just_ui.spin)
+        just_ui.spin.interpolator = LinearInterpolator()
         //toolbar buttons
         val toolbar_settings_button = findViewById<AppCompatImageView>(R.id.toolbar_settings_button)
         //disable back button (we r in main acc)
         findViewById<AppCompatImageView>(R.id.toolbar_back_button).visibility = View.GONE
 
         //start data refreshing
-        val refresher = ApiScheduler(just_ui.api) //use object inside scheduler
+        val refresher = ApiScheduler(just_ui.api) //use api object inside scheduler
         refresher.start() //start refreshing
 
 
@@ -79,41 +83,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        //listeners implementations
-        just_ui.growlight_switch.setOnCheckedChangeListener { _, isChecked ->
-            //okay so if flag is true it means the listener is suspended
-            if(!growlight_switch_flag){
-                if (isChecked){
-                    //switch growlight on
-                    just_ui.api.setGrowlightState(true)
-                    just_ui.growlight_shine.visibility=View.VISIBLE
-                }else{
-                    //switch growlight off
-                    just_ui.api.setGrowlightState(false)
-                    just_ui.growlight_shine.visibility=View.INVISIBLE
-                }
 
-                val message = if (isChecked) "Grow light:ON" else "Grow light:OFF"
-                showToast(message)
-            }
-        }
-        just_ui.exhaust_fan_switch.setOnCheckedChangeListener{ _, isChecked ->
-            //okay so if flag is true it means the listener is suspended
-            if(!exhaust_switch_flag){
-                if (isChecked){
-                    //switch growlight on
-                    just_ui.api.setExhaustState(true)
-                    just_ui.exhaust_fan.startAnimation(just_ui.spin)
-                }else{
-                    //switch growlight off
-                    just_ui.api.setExhaustState(false)
-                    just_ui.exhaust_fan.clearAnimation()
-                }
-                val message = if (isChecked) "Wywiew:ON" else "Wywiew:OFF"
-                showToast(message)
-            }
-
-        }
         //UI listeners
         toolbar_settings_button?.setOnClickListener{
             val intent = Intent(this, SettingsActivity::class.java)
@@ -123,19 +93,32 @@ class MainActivity : AppCompatActivity() {
             refreshUi(just_ui)
             showToast("Dane zostały odświerzone")
         }
-        dht1_model.setOnClickListener {
+        dht1_button.setOnClickListener {
             val intent = Intent(this, SensorDetailsActivity::class.java)
             intent.putExtra("sensor","DHT1")
+            intent.putExtra("readings",just_ui.api.getDht())
             startActivity(intent)
         }
-        dht2_model.setOnClickListener {
+        dht2_button.setOnClickListener {
             val intent = Intent(this, SensorDetailsActivity::class.java)
             intent.putExtra("sensor","DHT2")
+            intent.putExtra("readings",just_ui.api.getDht2())
             startActivity(intent)
         }
-        dst_model.setOnClickListener {
+        dst_button.setOnClickListener {
             val intent = Intent(this, SensorDetailsActivity::class.java)
             intent.putExtra("sensor","DST")
+            intent.putExtra("readings",just_ui.api.getDst())
+            startActivity(intent)
+        }
+        exhaust_settings_button?.setOnClickListener{
+            val intent = Intent(this, DeviceDetailsActivity::class.java)
+            intent.putExtra("device","EXHAUST")
+            startActivity(intent)
+        }
+        lamp_settings_button?.setOnClickListener{
+            val intent = Intent(this, DeviceDetailsActivity::class.java)
+            intent.putExtra("device","LAMP")
             startActivity(intent)
         }
     }
@@ -147,28 +130,52 @@ class MainActivity : AppCompatActivity() {
         ).show()
     }
     private fun refreshUi(just_ui: justAnUi){
-        just_ui.dht_data.text=just_ui.api.getDht()
-        just_ui.dht2_data.text=just_ui.api.getDht2()
-        just_ui.dst_data.text=just_ui.api.getDst()
-        growlight_switch_flag=true //suspend the switch listener
-        exhaust_switch_flag=true //suspend the switch listener
+        //updating text data
+        //start this as a coroutine to a) do it safely b) dont block main thread while it waits for data
+        CoroutineScope(IO).launch{
+            while(just_ui.api.getDht()==""){
+                delay(10)
+            }
+            runOnUiThread{
+                just_ui.srednia_temp.text=just_ui.api.getDht()?.split(";")[0]+" °C"
+                just_ui.srednia_wilgoc.text=just_ui.api.getDht()?.split(";")[1]+" %"
+            }
+        }
+        //update connection status
+        if(just_ui.api.getConnectionState()){
+            just_ui.connection_model.setImageResource(R.drawable.signal_online)
+        }else{
+            just_ui.connection_model.setImageResource(R.drawable.signal_offline)
+        }
+        //updating fan animations
         if(just_ui.api.getExhaustState()){
             just_ui.exhaust_fan.startAnimation(just_ui.spin)
-            just_ui.exhaust_fan_switch.isChecked = true
         }else{
             just_ui.exhaust_fan.clearAnimation()
-            just_ui.exhaust_fan_switch.isChecked = false
         }
-
+        //updating lamp image to match it's state
         if(just_ui.api.getGrowlightState()){
-            just_ui.growlight_shine.visibility = View.VISIBLE
-            just_ui.growlight_switch.isChecked = true
+            just_ui.lamp_model.setImageResource(R.drawable.lamp_model_on)
         }else{
-            just_ui.growlight_shine.visibility = View.INVISIBLE
-            just_ui.growlight_switch.isChecked = false
+            just_ui.lamp_model.setImageResource(R.drawable.lamp_model_off)
         }
-        growlight_switch_flag=false //unsuspend the switch listener
-        exhaust_switch_flag=false //unsuspend the switch listener
+    }
+    private fun loadCustomLabels(settings: SharedPreferences){
+        //class that holds all custom labels
+        val ui_labels = uiLabels(
+            findViewById(R.id.dht1_name),
+            findViewById(R.id.dht2_name),
+            findViewById(R.id.dst_name),
+            findViewById(R.id.lamp_name),
+            findViewById(R.id.exhaust_name)
+        )
+        //set all device names according to user settings
+        ui_labels.dht1_label.text= settings.getString("DHT1" , "DHT1" )
+        ui_labels.dht2_label.text= settings.getString("DHT2" , "DHT2" )
+        ui_labels.dst_label.text= settings.getString("DST" , "DST" )
+        ui_labels.exhaust_label.text= settings.getString("EXHAUST" , "EXHAUST" )
+        ui_labels.lamp_label.text= settings.getString("LAMP" , "LAMP" )
+
     }
 
 }

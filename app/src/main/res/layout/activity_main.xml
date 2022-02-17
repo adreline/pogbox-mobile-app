@@ -5,245 +5,397 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Main"
     android:forceDarkAllowed="false"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/dht_model2"
-        android:layout_width="35dp"
-        android:layout_height="71dp"
-        android:layout_marginBottom="4dp"
-        android:contentDescription="Ideogram of a DHT sensor"
-        app:layout_constraintBottom_toTopOf="@+id/growbox_model"
+    <TableLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:stretchColumns="*"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.148"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/dht_model" />
+        app:layout_constraintTop_toBottomOf="@+id/include2">
+
+        <TableRow
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:baselineAligned="false"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/connection_model"
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp"
+                    app:srcCompat="@drawable/signal_offline" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Serwer"
+                    android:textAlignment="center"
+                    android:textColor="@color/White"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/exhaust_settings_button"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/exhaust_fan_model"
+                        android:layout_width="wrap_content"
+                        android:layout_height="39dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/chasiss_model3"
+                        app:layout_constraintEnd_toEndOf="@+id/chasiss_model3"
+                        app:layout_constraintStart_toStartOf="@+id/chasiss_model3"
+                        app:layout_constraintTop_toTopOf="@+id/chasiss_model3"
+                        app:srcCompat="@drawable/fan_blades" />
+
+                    <ImageView
+                        android:id="@+id/chasiss_model3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/fan_chassi" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/exhaust_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/placeholder"
+                    android:textAlignment="center"
+                    android:textColor="@color/White" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lamp_settings_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/lamp_model_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/lamp_model_on" />
+
+                <TextView
+                    android:id="@+id/lamp_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/placeholder"
+                    android:textAlignment="center"
+                    android:textColor="@color/White" />
+            </LinearLayout>
+
+        </TableRow>
+
+    </TableLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="0dp"
+        android:layout_height="524dp"
+        android:background="@drawable/rounded_corner_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
+            android:layout_width="0dp"
+            android:layout_height="78dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/rounded_all_corner_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/thermometer" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="6dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/srednia_temp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/placeholder" />
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/rednia_temp_dzi"
+                            android:textColor="@color/Text_light"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_weight="2" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/droplet" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="6dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/srednia_wilgoc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/placeholder" />
+
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/rednia_wilg_dzi"
+                            android:textColor="@color/Text_light"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/rounded_corner_background_darker"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/urz_dzenia"
+                android:textColor="@color/Text"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.079"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView12">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/dst_button"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/rounded_all_corner_background_white"
+                    app:layout_constraintBottom_toBottomOf="@+id/dht2_button"
+                    app:layout_constraintStart_toEndOf="@+id/dht2_button"
+                    app:layout_constraintTop_toTopOf="@+id/dht2_button">
+
+                    <ImageView
+                        android:id="@+id/dst_model"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Ideogram of a DHT sensor"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.3"
+                        app:srcCompat="@drawable/dst_model" />
+
+                    <TextView
+                        android:id="@+id/dst_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLength="7"
+                        android:maxLines="1"
+                        android:text="@string/placeholder"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/dst_model" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/dht2_button"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/rounded_all_corner_background_white"
+                    app:layout_constraintBottom_toBottomOf="@+id/dht1_button"
+                    app:layout_constraintStart_toEndOf="@+id/dht1_button"
+                    app:layout_constraintTop_toTopOf="@+id/dht1_button">
+
+                    <ImageView
+                        android:id="@+id/dht2_model"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.307"
+                        app:srcCompat="@drawable/dht_model" />
+
+                    <TextView
+                        android:id="@+id/dht2_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLength="7"
+                        android:maxLines="1"
+                        android:text="@string/placeholder"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/dht2_model" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/dht1_button"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:background="@drawable/rounded_all_corner_background_white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <ImageView
+                        android:id="@+id/dht1_model"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Ideogram of a DHT sensor"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.3"
+                        app:srcCompat="@drawable/dht_model" />
+
+                    <TextView
+                        android:id="@+id/dht1_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLength="7"
+                        android:maxLines="1"
+                        android:text="@string/placeholder"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/dht1_model" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
         android:id="@+id/include2"
         layout="@layout/toolbar" />
-
-    <ImageView
-        android:id="@+id/growbox_model"
-        android:layout_width="307dp"
-        android:layout_height="568dp"
-        android:contentDescription="@string/placeholder"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.824"
-        app:srcCompat="@drawable/box_model" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="138dp"
-        android:layout_height="151dp"
-        android:contentDescription="Growbox ideogram"
-        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
-        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
-        app:layout_constraintStart_toStartOf="@+id/growbox_model"
-        app:layout_constraintTop_toBottomOf="@+id/growlight_shine"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/plant_model" />
-
-    <ImageView
-        android:id="@+id/chasiss_model"
-        android:layout_width="49dp"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
-        app:layout_constraintEnd_toStartOf="@+id/chasiss_model2"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/growbox_model"
-        app:layout_constraintTop_toTopOf="@+id/growlight_model"
-        app:layout_constraintVertical_bias="0.949"
-        app:srcCompat="@drawable/fan_chassi" />
-
-    <ImageView
-        android:id="@+id/chasiss_model2"
-        android:layout_width="49dp"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
-        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
-        app:layout_constraintHorizontal_bias="0.329"
-        app:layout_constraintStart_toStartOf="@+id/growbox_model"
-        app:layout_constraintTop_toTopOf="@+id/growbox_model"
-        app:layout_constraintVertical_bias="0.949"
-        app:srcCompat="@drawable/fan_chassi" />
-
-    <ImageView
-        android:id="@+id/growlight_shine"
-        android:layout_width="193dp"
-        android:layout_height="187dp"
-        android:layout_marginTop="8dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
-        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
-        app:layout_constraintStart_toStartOf="@+id/growbox_model"
-        app:layout_constraintTop_toBottomOf="@+id/growlight_switch"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/shine" />
-
-    <TextView
-        android:id="@+id/dst_data"
-        android:layout_width="68dp"
-        android:layout_height="19dp"
-        android:layout_marginTop="4dp"
-        android:text="@string/placeholder"
-        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
-        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
-        app:layout_constraintHorizontal_bias="0.671"
-        app:layout_constraintStart_toEndOf="@+id/dht_data"
-        app:layout_constraintTop_toBottomOf="@+id/dst_model"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/dht_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/placeholder"
-        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
-        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
-        app:layout_constraintHorizontal_bias="0.251"
-        app:layout_constraintStart_toStartOf="@+id/growbox_model"
-        app:layout_constraintTop_toBottomOf="@+id/dht_model"
-        app:layout_constraintVertical_bias="0.004" />
-
-    <TextView
-        android:id="@+id/dht_data2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/placeholder"
-        app:layout_constraintBottom_toTopOf="@+id/growbox_model"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/dht_model2"
-        app:layout_constraintTop_toBottomOf="@+id/include2"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <ImageView
-        android:id="@+id/growlight_model"
-        android:layout_width="215dp"
-        android:layout_height="234dp"
-        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
-        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
-        app:layout_constraintHorizontal_bias="0.516"
-        app:layout_constraintStart_toStartOf="@+id/growbox_model"
-        app:layout_constraintTop_toTopOf="@+id/growbox_model"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/lamp_model" />
-
-    <ImageView
-        android:id="@+id/dst_model"
-        android:layout_width="69dp"
-        android:layout_height="76dp"
-        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
-        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
-        app:layout_constraintHorizontal_bias="0.806"
-        app:layout_constraintStart_toStartOf="@+id/growbox_model"
-        app:layout_constraintTop_toBottomOf="@+id/growlight_model"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/dst_model" />
-
-    <ImageView
-        android:id="@+id/dht_model"
-        android:layout_width="37dp"
-        android:layout_height="79dp"
-        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
-        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
-        app:layout_constraintHorizontal_bias="0.249"
-        app:layout_constraintStart_toStartOf="@+id/growbox_model"
-        app:layout_constraintTop_toBottomOf="@+id/growlight_model"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/dht_model" />
-
-    <Switch
-        android:id="@+id/growlight_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/growlight_model"
-        app:layout_constraintEnd_toEndOf="@+id/growlight_model"
-        app:layout_constraintHorizontal_bias="0.485"
-        app:layout_constraintStart_toStartOf="@+id/growlight_model"
-        app:layout_constraintTop_toTopOf="@+id/growbox_model"
-        app:layout_constraintVertical_bias="0.763"
-        tools:ignore="DuplicateSpeakableTextCheck" />
-
-    <ImageView
-        android:id="@+id/intake_fan_model_1"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:layout_constraintBottom_toBottomOf="@+id/chasiss_model2"
-        app:layout_constraintEnd_toEndOf="@+id/chasiss_model2"
-        app:layout_constraintStart_toStartOf="@+id/chasiss_model2"
-        app:layout_constraintTop_toTopOf="@+id/chasiss_model2"
-        app:srcCompat="@drawable/fan_blades" />
-
-    <ImageView
-        android:id="@+id/intake_fan_model_2"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:layout_constraintBottom_toBottomOf="@+id/chasiss_model"
-        app:layout_constraintEnd_toEndOf="@+id/chasiss_model"
-        app:layout_constraintStart_toStartOf="@+id/chasiss_model"
-        app:layout_constraintTop_toTopOf="@+id/chasiss_model"
-        app:srcCompat="@drawable/fan_blades" />
-
-    <ImageView
-        android:id="@+id/chasiss_model3"
-        android:layout_width="51dp"
-        android:layout_height="52dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
-        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
-        app:layout_constraintHorizontal_bias="0.944"
-        app:layout_constraintStart_toStartOf="@+id/growbox_model"
-        app:layout_constraintTop_toTopOf="@+id/growbox_model"
-        app:layout_constraintVertical_bias="0.019"
-        app:srcCompat="@drawable/fan_chassi"
-        android:contentDescription="TODO" />
-
-    <ImageView
-        android:id="@+id/exhaust_fan_model"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:layout_constraintBottom_toBottomOf="@+id/chasiss_model3"
-        app:layout_constraintEnd_toEndOf="@+id/chasiss_model3"
-        app:layout_constraintStart_toStartOf="@+id/chasiss_model3"
-        app:layout_constraintTop_toTopOf="@+id/chasiss_model3"
-        app:srcCompat="@drawable/fan_blades"
-        android:contentDescription="TODO" />
-
-    <Switch
-        android:id="@+id/exhaust_fan_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/growbox_model"
-        app:layout_constraintEnd_toEndOf="@+id/growbox_model"
-        app:layout_constraintHorizontal_bias="0.945"
-        app:layout_constraintStart_toStartOf="@+id/growbox_model"
-        app:layout_constraintTop_toBottomOf="@+id/chasiss_model3"
-        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/refresh_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        app:backgroundTint="@color/Accent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.89"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.939"
-        app:srcCompat="@drawable/ic_baseline_refresh_24" />
+        app:srcCompat="@drawable/ic_baseline_refresh_24"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

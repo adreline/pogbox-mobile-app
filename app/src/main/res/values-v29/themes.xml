@@ -4,13 +4,13 @@
     <style name="Theme.Growbox" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:forceDarkAllowed">false</item>
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/vegetation_200</item>
-        <item name="colorPrimaryVariant">@color/vegetation_500</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/Button</item>
+        <item name="colorPrimaryVariant">@color/Main</item>
+        <item name="colorOnPrimary">@color/White</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/coffee_200</item>
-        <item name="colorSecondaryVariant">@color/coffee_500</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/Accent</item>
+        <item name="colorSecondaryVariant">@color/Window</item>
+        <item name="colorOnSecondary">@color/Text</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->

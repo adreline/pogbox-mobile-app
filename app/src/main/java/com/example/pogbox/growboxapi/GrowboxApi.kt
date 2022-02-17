@@ -20,6 +20,7 @@ class GrowboxApi(shared: SharedPreferences) {
     var GL_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("GL_URL" , "/" )}"
     var SERVER_INFO = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("SERVER_INFO" , "/" )}"
     var SET_SCHEDULE_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("SET_SCHEDULE_URL" , "/" )}"
+    var SERVER_CONNECTION = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}"
 
     //local variables declarations
     private var dst_state=""
@@ -34,6 +35,7 @@ class GrowboxApi(shared: SharedPreferences) {
     private var space_info = ""
     private var cpu_temp_info = ""
     private var database_size = ""
+    private var connection_state=false
 
     private val client=OkHttpClient()
 
@@ -41,27 +43,27 @@ class GrowboxApi(shared: SharedPreferences) {
         val request = Request.Builder().url(url).build()
         client.newCall(request).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {
-                println(e)
+                connection_state=false
             }
             override fun onResponse(call: Call, response: Response) {
                 val body = response.body?.string()
                 val gson = GsonBuilder().create()
-
+                connection_state=true
                 when(url){
                     DHT_URL -> {
                         val dht_data: DhtModel = gson.fromJson(body, DhtModel::class.java)
-                        dht_state="${dht_data.temperature} °C  ${dht_data.humidity}%"
-                        last_updated_dht= "Ostatni update: "+dht_data.time_stamp
+                        dht_state="${dht_data.temperature};${dht_data.humidity}"
+                        last_updated_dht= dht_data.time_stamp
                     }
                     DHT2_URL -> {
                         val dht2_data: DhtModel = gson.fromJson(body, DhtModel::class.java)
-                        dht2_state="${dht2_data.temperature} °C  ${dht2_data.humidity}%"
-                        last_updated_dht2= "Ostatni update: "+dht2_data.time_stamp
+                        dht2_state="${dht2_data.temperature};${dht2_data.humidity}"
+                        last_updated_dht2=dht2_data.time_stamp
                     }
                     DST_URL -> {
                         val dst_data: DstModel = gson.fromJson(body, DstModel::class.java)
-                        dst_state="${dst_data.temperature} °C"
-                        last_updated_dst = "Ostatni update: "+dst_data.time_stamp
+                        dst_state="${dst_data.temperature}"
+                        last_updated_dst = dst_data.time_stamp
                     }
                     SERVER_INFO -> {
                         val server_info = gson.fromJson(body, ServerInfoModel::class.java)
@@ -69,7 +71,6 @@ class GrowboxApi(shared: SharedPreferences) {
                         cpu_temp_info = "${server_info.cpu_temp} °C"
                         database_size = "${server_info.dbdata} MB"
                     }
-
                 }
             }
         })
@@ -198,5 +199,8 @@ class GrowboxApi(shared: SharedPreferences) {
     }
     fun getCrontab(): String{
         return crontab
+    }
+    fun getConnectionState(): Boolean {
+        return connection_state
     }
 }

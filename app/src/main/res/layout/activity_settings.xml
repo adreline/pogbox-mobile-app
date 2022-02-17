@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Main"
     tools:context=".SettingsActivity">
 
     <include
@@ -14,249 +15,241 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout7"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/ConstraintLayout2"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include">
 
-        <TextView
-            android:id="@+id/title2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/harmonogram_n_wiat_a"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/subTitle3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/uruchom_o_godzinie"
-            android:textColor="@color/vegetation_700"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/turnon_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="time"
-            android:minHeight="48dp"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:text="@string/placeholder"
-            tools:ignore="DuplicateSpeakableTextCheck" />
-
-        <TextView
-            android:id="@+id/subTitle4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/wy_cz_o_godzinie"
-            android:textColor="@color/vegetation_700"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/turnoff_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="time"
-            android:minHeight="48dp"
-            android:text="@string/placeholder" />
-
-        <Button
-            android:id="@+id/save_schedule_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/zapisz" />
-
-        <TextView
-            android:id="@+id/Title1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/debug_info"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/SubTitle1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/dst"
-            android:textColor="@color/vegetation_700"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/Content1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/placeholder"
-            android:textColor="@color/coffee_700"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/subTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/dht_growbox"
-            android:textColor="@color/vegetation_700"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/Content2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/placeholder"
-            android:textColor="@color/coffee_700"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/SubTitle2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/dht_ambient"
-            android:textColor="@color/vegetation_700"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/content2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/placeholder"
-            android:textColor="@color/coffee_700"
-            android:textSize="12sp" />
-
-    </LinearLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ConstraintLayout2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
         <LinearLayout
-            android:id="@+id/LinearLayout3"
+            android:id="@+id/linearLayout"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/LinearLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/subTitle5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/crontab"
-                android:textColor="@color/vegetation_700"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/content3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/placeholder"
-                android:textColor="@color/coffee_700"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/subTitle2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/server_memory"
-                android:textColor="@color/vegetation_700"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/content4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/placeholder"
-                android:textColor="@color/coffee_700"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/subTitle7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/database_size"
-                android:textColor="@color/vegetation_700"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/content6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/placeholder"
-                android:textColor="@color/coffee_700"
-                android:textSize="12sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/LinearLayout2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/LinearLayout3"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/subTitle6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/cpu_temp"
-                android:textColor="@color/vegetation_700"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/content5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/placeholder"
-                android:textColor="@color/coffee_700"
-                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/server_ip_address_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Server IP Address" />
+                android:layout_margin="5dp"
+                android:text="Server IP Address"
+                android:textColor="@color/White" />
 
-            <EditText
-                android:id="@+id/server_ip_address_input"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"
-                android:text="0.0.0.0" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/server_address_ip_commit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/zapisz" />
+                <EditText
+                    android:id="@+id/server_ip_address_input"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="@color/White"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    android:text="@string/placeholder"
+                    android:textColor="@color/White" />
 
+                <ImageButton
+                    android:id="@+id/server_address_ip_commit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/Button"
+                    android:padding="19dp"
+                    android:src="@drawable/save_icon" />
+
+            </LinearLayout>
         </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rounded_corner_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7"
+        app:layout_constraintVertical_bias="1.0">
+
+        <TextView
+            android:id="@+id/Title1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/debug_info"
+            android:textColor="@color/Text"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ConstraintLayout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="32dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Title1">
+
+            <LinearLayout
+                android:id="@+id/LinearLayout3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/LinearLayout2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/SubTitle1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dst"
+                    android:textColor="@color/Text"
+                    android:textSize="16sp"
+                    tools:textColor="@color/Text" />
+
+                <TextView
+                    android:id="@+id/Content1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/placeholder"
+                    android:textSize="12sp"
+                    tools:textColor="@color/Text_light" />
+
+                <TextView
+                    android:id="@+id/subTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dht_growbox"
+                    android:textColor="@color/Text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/Content2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/placeholder"
+                    android:textColor="@color/Text_light"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/SubTitle2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dht_ambient"
+                    android:textColor="@color/Text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/content2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/placeholder"
+                    android:textColor="@color/Text_light"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/LinearLayout3"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/subTitle2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/server_memory"
+                    android:textColor="@color/Text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/content3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/placeholder"
+                    android:textColor="@color/Text_light"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/subTitle5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/crontab"
+                    android:textColor="@color/Text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/content6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/placeholder"
+                    android:textColor="@color/Text_light"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/subTitle7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/database_size"
+                    android:textColor="@color/Text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/content4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/placeholder"
+                    android:textColor="@color/Text_light"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/subTitle6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cpu_temp"
+                    android:textColor="@color/Text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/content5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/placeholder"
+                    android:textColor="@color/Text_light"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
