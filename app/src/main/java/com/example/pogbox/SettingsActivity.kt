@@ -30,7 +30,7 @@ class SettingsActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.toolbar_title).text="Ustawienia"
         //other
         val save_server_ip_button = findViewById<ImageButton>(R.id.server_address_ip_commit)
-        val goto_boxlayout_button = findViewById<Button>(R.id.goto_boxlayout_button)
+        val goto_boxlayout_button = findViewById<ImageButton>(R.id.goto_boxlayout_button)
         val ip_input = findViewById<AutoCompleteTextView>(R.id.server_ip_address_input)
         //enable autocomplete for ip input
         val countries: Array<out String> = resources.getStringArray(R.array.ip_array)

@@ -36,7 +36,7 @@
     <string name="ostatnie_10_godzin">Ostatnie 10 godzin</string>
     <string name="sensor_ideogram">Sensor ideogram</string>
     <string name="server_ip_address">Server IP Address</string>
-    <string name="rozmieszczenie_element_w_w_growbox_sie">Rozmieszczenie elementów w growbox\'sie</string>
+    <string name="rozmieszczenie_element_w_w_growbox_sie">Zobacz rozmieszczenie elementów w growbox\'sie</string>
     <string name="growbox">Growbox</string>
     <string name="model">Model</string>
 </resources>
