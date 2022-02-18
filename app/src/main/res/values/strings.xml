@@ -38,4 +38,5 @@
     <string name="server_ip_address">Server IP Address</string>
     <string name="rozmieszczenie_element_w_w_growbox_sie">Rozmieszczenie elementów w growbox\'sie</string>
     <string name="growbox">Growbox</string>
+    <string name="model">Model</string>
 </resources>
