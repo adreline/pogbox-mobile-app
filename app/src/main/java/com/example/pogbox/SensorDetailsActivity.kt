@@ -13,6 +13,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 
 class SensorDetailsActivity : AppCompatActivity() {
@@ -38,6 +39,11 @@ class SensorDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sensor_details)
 
         shared = getSharedPreferences("default" , Context.MODE_PRIVATE)//this loads global settings under name of default
+        //BottomSheet needs to start in expanded state
+        val bottomSheetBehavior: BottomSheetBehavior<*>?
+        val bottomSheet: View = findViewById(R.id.constraintLayout)
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
         val plots_dir = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("PLOTS_DIR" , "/" )}" //resolve path from settings
         val sensor_discrete_name=intent.getStringExtra("sensor")

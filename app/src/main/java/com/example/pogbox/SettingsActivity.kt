@@ -9,6 +9,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.pogbox.growboxapi.GrowboxApi
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.delay
@@ -20,9 +21,12 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         settings = getSharedPreferences("default" , Context.MODE_PRIVATE)//this loads global settings under name of default
-        //
-
         val api = GrowboxApi(settings) //create service object
+        //BottomSheet needs to start in expanded state
+        val bottomSheetBehavior: BottomSheetBehavior<*>?
+        val bottomSheet: View = findViewById(R.id.bottom_sheet1)
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
         //toolbars
         val toolbar_back_button = findViewById<AppCompatImageView>(R.id.toolbar_back_button)
@@ -30,7 +34,7 @@ class SettingsActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.toolbar_title).text="Ustawienia"
         //other
         val save_server_ip_button = findViewById<ImageButton>(R.id.server_address_ip_commit)
-        val goto_boxlayout_button = findViewById<Button>(R.id.goto_boxlayout_button)
+        val goto_boxlayout_button = findViewById<ImageButton>(R.id.goto_boxlayout_button)
         val ip_input = findViewById<AutoCompleteTextView>(R.id.server_ip_address_input)
         //enable autocomplete for ip input
         val countries: Array<out String> = resources.getStringArray(R.array.ip_array)

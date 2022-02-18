@@ -73,207 +73,228 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayout9"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
             <TextView
                 android:id="@+id/textView6"
-                android:layout_width="match_parent"
+                android:layout_width="238dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:ellipsize="end"
+                android:singleLine="false"
                 android:text="@string/rozmieszczenie_element_w_w_growbox_sie"
                 android:textColor="@color/White" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/goto_boxlayout_button"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/growbox" />
+                android:backgroundTint="@color/Button"
+                android:minWidth="21dp"
+                android:src="@drawable/ic_baseline_arrow_forward_24" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/rounded_corner_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout7"
         app:layout_constraintVertical_bias="1.0">
 
-        <TextView
-            android:id="@+id/Title1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/debug_info"
-            android:textColor="@color/Text"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.10"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.1" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/ConstraintLayout2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="32dp"
-            android:visibility="visible"
+            android:id="@+id/bottom_sheet1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rounded_corner_background"
+            app:behavior_hideable="false"
+            app:behavior_peekHeight="60dp"
+            app:layout_behavior="@string/bottom_sheet_behavior"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Title1">
+            app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
-                android:id="@+id/LinearLayout3"
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/Title1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/LinearLayout2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/SubTitle1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dst"
-                    android:textColor="@color/Text"
-                    android:textSize="16sp"
-                    tools:textColor="@color/Text" />
-
-                <TextView
-                    android:id="@+id/Content1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/placeholder"
-                    android:textSize="12sp"
-                    tools:textColor="@color/Text_light" />
-
-                <TextView
-                    android:id="@+id/subTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dht_growbox"
-                    android:textColor="@color/Text"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/Content2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/placeholder"
-                    android:textColor="@color/Text_light"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/SubTitle2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dht_ambient"
-                    android:textColor="@color/Text"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/content2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/placeholder"
-                    android:textColor="@color/Text_light"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/LinearLayout2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:text="@string/debug_info"
+                android:textColor="@color/Text"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/LinearLayout3"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintHorizontal_bias="0.10"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.06999999" />
 
-                <TextView
-                    android:id="@+id/subTitle2"
-                    android:layout_width="match_parent"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="32dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Title1"
+                app:layout_constraintVertical_bias="0.0">
+
+                <LinearLayout
+                    android:id="@+id/LinearLayout3"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/server_memory"
-                    android:textColor="@color/Text"
-                    android:textSize="16sp" />
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/LinearLayout2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/content3"
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/SubTitle1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dst"
+                        android:textColor="@color/Text"
+                        android:textSize="16sp"
+                        tools:textColor="@color/Text" />
+
+                    <TextView
+                        android:id="@+id/Content1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/placeholder"
+                        android:textSize="12sp"
+                        tools:textColor="@color/Text_light" />
+
+                    <TextView
+                        android:id="@+id/subTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dht_growbox"
+                        android:textColor="@color/Text"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/Content2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/placeholder"
+                        android:textColor="@color/Text_light"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/SubTitle2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dht_ambient"
+                        android:textColor="@color/Text"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/content2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/placeholder"
+                        android:textColor="@color/Text_light"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LinearLayout2"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/placeholder"
-                    android:textColor="@color/Text_light"
-                    android:textSize="12sp" />
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/LinearLayout3"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/subTitle5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/crontab"
-                    android:textColor="@color/Text"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/subTitle2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/server_memory"
+                        android:textColor="@color/Text"
+                        android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/content6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/placeholder"
-                    android:textColor="@color/Text_light"
-                    android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/content3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/placeholder"
+                        android:textColor="@color/Text_light"
+                        android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/subTitle7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/database_size"
-                    android:textColor="@color/Text"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/subTitle5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/crontab"
+                        android:textColor="@color/Text"
+                        android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/content4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/placeholder"
-                    android:textColor="@color/Text_light"
-                    android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/content6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/placeholder"
+                        android:textColor="@color/Text_light"
+                        android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/subTitle6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cpu_temp"
-                    android:textColor="@color/Text"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/subTitle7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/database_size"
+                        android:textColor="@color/Text"
+                        android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/content5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/placeholder"
-                    android:textColor="@color/Text_light"
-                    android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/content4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/placeholder"
+                        android:textColor="@color/Text_light"
+                        android:textSize="12sp" />
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/subTitle6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cpu_temp"
+                        android:textColor="@color/Text"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/content5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/placeholder"
+                        android:textColor="@color/Text_light"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
