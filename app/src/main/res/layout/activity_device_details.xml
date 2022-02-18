@@ -17,12 +17,11 @@
         android:layout_height="52dp"
         android:scaleX="2"
         android:scaleY="2"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout6"
-        app:layout_constraintEnd_toStartOf="@+id/device_name_input"
-        app:layout_constraintHorizontal_bias="0.26"
+        app:layout_constraintBottom_toBottomOf="@+id/fan_chassi"
+        app:layout_constraintEnd_toStartOf="@+id/lamp_model"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include2"
-        app:layout_constraintVertical_bias="0.29000002" />
+        app:layout_constraintVertical_bias="0.45" />
 
     <EditText
         android:id="@+id/device_name_input"
@@ -66,112 +65,145 @@
         app:layout_constraintVertical_bias="0.19"
         app:srcCompat="@drawable/lamp_model_on" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout6"
-        android:layout_width="match_parent"
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corner_background"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lamp_model"
+        app:layout_constraintTop_toBottomOf="@+id/fan_chassi"
         app:layout_constraintVertical_bias="1.0">
 
-        <TextView
-            android:id="@+id/main_window_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/harmonogram_n_wiat_a"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.10"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.10" />
-
-        <LinearLayout
-            android:id="@+id/schedule_input_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/main_window_label">
-
-            <TextView
-                android:id="@+id/from"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/from"
-                android:textColor="@color/Text_light"
-                android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/from_time_input"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="5"
-                android:inputType="time"
-                android:minHeight="48dp"
-                tools:ignore="SpeakableTextPresentCheck" />
-
-            <TextView
-                android:id="@+id/untill"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/untill"
-                android:textColor="@color/Text_light"
-                android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/untill_time_input"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="5"
-                android:inputType="time"
-                android:minHeight="48dp"
-                tools:ignore="SpeakableTextPresentCheck" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/save_schedule_button_2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/Button"
-            android:text="@string/zapisz"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/schedule_input_layout"
-            app:layout_constraintStart_toStartOf="@+id/schedule_input_layout"
-            app:layout_constraintTop_toBottomOf="@+id/schedule_input_layout"
-            tools:ignore="TextContrastCheck" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/sub_window"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/rounded_corner_background_darker"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/save_schedule_button_2">
+            android:id="@+id/constraintLayout6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rounded_corner_background"
+            app:behavior_hideable="false"
+            app:behavior_peekHeight="50dp"
+            app:layout_behavior="@string/bottom_sheet_behavior">
 
             <TextView
-                android:id="@+id/sub_window_label"
+                android:id="@+id/main_window_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ustawienia"
+                android:textColor="@color/Text"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.10"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.08" />
+
+            <TextView
+                android:id="@+id/harmonogram_label_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/harmonogram_n_wiat_a"
+                app:layout_constraintEnd_toEndOf="@+id/main_window_label"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/main_window_label"
+                app:layout_constraintTop_toBottomOf="@+id/main_window_label" />
+
+            <LinearLayout
+                android:id="@+id/schedule_input_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/dodatkowe"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/harmonogram_label_1">
+
+                <TextView
+                    android:id="@+id/from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/from"
+                    android:textColor="@color/Text_light"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/from_time_input"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="5"
+                    android:inputType="time"
+                    android:minHeight="48dp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <TextView
+                    android:id="@+id/untill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/untill"
+                    android:textColor="@color/Text_light"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/untill_time_input"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="5"
+                    android:inputType="time"
+                    android:minHeight="48dp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/save_schedule_button_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/Button"
+                android:text="@string/zapisz"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/schedule_input_layout"
+                app:layout_constraintStart_toStartOf="@+id/schedule_input_layout"
+                app:layout_constraintTop_toBottomOf="@+id/schedule_input_layout"
+                tools:ignore="TextContrastCheck" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/sub_window"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/rounded_corner_background_darker"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.1" />
+                app:layout_constraintTop_toBottomOf="@+id/save_schedule_button_2">
+
+                <TextView
+                    android:id="@+id/sub_window_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/dodatkowe"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/sub_window_label" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
     <TextView
         android:id="@+id/textView15"

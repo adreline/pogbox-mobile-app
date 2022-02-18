@@ -9,6 +9,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.pogbox.growboxapi.GrowboxApi
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.delay
@@ -20,9 +21,12 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         settings = getSharedPreferences("default" , Context.MODE_PRIVATE)//this loads global settings under name of default
-        //
-
         val api = GrowboxApi(settings) //create service object
+        //BottomSheet needs to start in expanded state
+        val bottomSheetBehavior: BottomSheetBehavior<*>?
+        val bottomSheet: View = findViewById(R.id.bottom_sheet1)
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
         //toolbars
         val toolbar_back_button = findViewById<AppCompatImageView>(R.id.toolbar_back_button)

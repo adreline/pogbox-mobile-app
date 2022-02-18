@@ -10,13 +10,15 @@
         <entry key="..\:/Documents/myapps/AndroidStudio/PogBox/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.3675" />
         <entry key="..\:/Documents/myapps/AndroidStudio/PogBox/app/src/main/res/drawable/rounded_corner_background.xml" value="0.287109375" />
         <entry key="..\:/Documents/myapps/AndroidStudio/PogBox/app/src/main/res/layout-v29/activity_main.xml" value="0.24114583333333334" />
+        <entry key="..\:/Documents/myapps/AndroidStudio/PogBox/app/src/main/res/layout/activity_bottomsheettest.xml" value="0.1" />
         <entry key="..\:/Documents/myapps/AndroidStudio/PogBox/app/src/main/res/layout/activity_box_layout.xml" value="0.33" />
-        <entry key="..\:/Documents/myapps/AndroidStudio/PogBox/app/src/main/res/layout/activity_device_details.xml" value="0.33" />
+        <entry key="..\:/Documents/myapps/AndroidStudio/PogBox/app/src/main/res/layout/activity_device_details.xml" value="0.67" />
         <entry key="..\:/Documents/myapps/AndroidStudio/PogBox/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Documents/myapps/AndroidStudio/PogBox/app/src/main/res/layout/activity_sensor_details.xml" value="0.33" />
         <entry key="..\:/Documents/myapps/AndroidStudio/PogBox/app/src/main/res/layout/activity_settings.xml" value="0.33" />
         <entry key="..\:/Documents/myapps/AndroidStudio/PogBox/app/src/main/res/layout/activity_splash_screen.xml" value="0.25" />
         <entry key="..\:/Documents/myapps/AndroidStudio/PogBox/app/src/main/res/layout/fan_model.xml" value="0.275" />
+        <entry key="..\:/Documents/myapps/AndroidStudio/PogBox/app/src/main/res/layout/testbottomsheet.xml" value="0.275" />
         <entry key="..\:/Documents/myapps/AndroidStudio/PogBox/app/src/main/res/layout/toolbar.xml" value="0.33" />
         <entry key="..\:/Documents/myapps/AndroidStudio/PogBox/app/src/main/res/layout/toolbar_buttons.xml" value="0.275" />
         <entry key="..\:/Documents/myapps/AndroidStudio/PogBox/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.287109375" />

@@ -13,6 +13,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.pogbox.growboxapi.ApiScheduler
 import com.example.pogbox.growboxapi.GrowboxApi
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.coroutines.*
 
 class DeviceDetailsActivity : AppCompatActivity() {
@@ -25,6 +26,12 @@ class DeviceDetailsActivity : AppCompatActivity() {
          */
         shared = getSharedPreferences("default" , Context.MODE_PRIVATE)//this loads global settings under name of default
         val api = GrowboxApi(shared) //create api service object
+        //BottomSheet needs to start in expanded state
+        val bottomSheetBehavior: BottomSheetBehavior<*>?
+        val bottomSheet: View = findViewById(R.id.constraintLayout6)
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        //load settings
         val device_discrete_name=intent.getStringExtra("device")
         val device_friendly_name=shared.getString(device_discrete_name,device_discrete_name) //load friendly device name, if not set, fallback to discrete device name
         findViewById<TextView>(R.id.toolbar_title).text="${device_friendly_name} - Sterowanie urządzeniem"//set the topbar title
@@ -40,7 +47,7 @@ class DeviceDetailsActivity : AppCompatActivity() {
         val fan_blades_image = findViewById<ImageView>(R.id.fan_blades)
         val fan_chassi_image = findViewById<ImageView>(R.id.fan_chassi)
         val schedule_input_layout = findViewById<LinearLayout>(R.id.schedule_input_layout)
-        val main_window_label = findViewById<TextView>(R.id.main_window_label)
+        val harmonogram_label = findViewById<TextView>(R.id.harmonogram_label_1)
         val sub_window = findViewById<ConstraintLayout>(R.id.sub_window)
         val spin = AnimationUtils.loadAnimation(this,R.anim.spinny)
         spin.setInterpolator(LinearInterpolator())
@@ -116,7 +123,7 @@ class DeviceDetailsActivity : AppCompatActivity() {
                 fan_chassi_image.visibility = View.VISIBLE //display fan_chassi_image image
                 //remove scheduling, exhaust fan doesn't support it
                 schedule_input_layout.visibility = View.GONE
-                main_window_label.text = "Więcej"
+                harmonogram_label.visibility = View.GONE
                 sub_window.visibility = View.GONE
                 //Start ui refreshing coroutine
                 CoroutineScope(Dispatchers.IO).launch {
