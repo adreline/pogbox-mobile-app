@@ -8,6 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SplashScreen : AppCompatActivity() {
     lateinit var shared : SharedPreferences //this is a global settings instance
@@ -41,15 +45,24 @@ class SplashScreen : AppCompatActivity() {
         mediaPlayer.setOnPreparedListener {
             mediaPlayer.start()
         }
+        //This coroutine is a hotfix, for some reason it fixes bug PAA-25
+       val cor = CoroutineScope(Dispatchers.IO).launch{
+            while(true){
+                delay(100)
+                System.out.println("${mediaPlayer.currentPosition}")
+            }
+
+        }
         //listen for sound to finish
         mediaPlayer.setOnCompletionListener {
             //sound finished, proceed to main activity
-            System.out.println("SOUND END DETECTED")
+            cor.cancel() //kill the coroutine
             mediaPlayer.release()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish() //this kills this activity
         }
+
 
     }
 }
