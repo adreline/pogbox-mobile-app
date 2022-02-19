@@ -3,13 +3,17 @@ package com.example.pogbox
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.pogbox.growboxapi.ApiScheduler
@@ -39,6 +43,7 @@ class justAnUi(val api: GrowboxApi,
 class MainActivity : AppCompatActivity() {
     private lateinit var shared : SharedPreferences//this is a global settings instance
     //  ---------------ON CREATE (MAIN PROG)--------------
+    @RequiresApi(Build.VERSION_CODES.O) //this is needed for vibrator because its usage diffres depending on android version
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -47,7 +52,8 @@ class MainActivity : AppCompatActivity() {
         val bottomSheet: View = findViewById(R.id.constraintLayout2)
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-
+        //setup a vibrator
+        val v = (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator)
         shared = getSharedPreferences("default" , Context.MODE_PRIVATE)//this loads global settings under name of default
         //load custom labels
         loadCustomLabels(shared)
@@ -132,6 +138,32 @@ class MainActivity : AppCompatActivity() {
         server_status_button?.setOnClickListener{
             showToast("Ostatnia aktualizacja: ${just_ui.api.getDhtUpdate()}")
         }
+        //this allows for devices to be steered by long pressing their icons
+        exhaust_settings_button?.setOnLongClickListener {
+            if (just_ui.api.getExhaustState()){
+                //switch exhaust off
+                just_ui.api.setExhaustState(false)
+                showToast("${shared.getString("EXHAUST" , "EXHAUST" )} OFF")
+            }else{
+                //switch exhaust on
+                just_ui.api.setExhaustState(true)
+                showToast("${shared.getString("EXHAUST" , "EXHAUST" )} ON")
+            }
+            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
+            true }
+        lamp_settings_button?.setOnLongClickListener {
+            if (just_ui.api.getGrowlightState()){
+                //switch growlight off
+                just_ui.api.setGrowlightState(false)
+                showToast("${shared.getString("LAMP" , "LAMP" )} OFF")
+            }else{
+                //switch growlight on
+                just_ui.api.setGrowlightState(true)
+                showToast("${shared.getString("LAMP" , "LAMP" )} ON")
+            }
+            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
+            true }
+
     }
     //  ---------------FUNCTIONS DECLARATIONS--------------
     private fun showToast(text: String){
