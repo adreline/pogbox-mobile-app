@@ -70,8 +70,8 @@ class SensorDetailsActivity : AppCompatActivity() {
                 plot_canvas_1.visibility= View.VISIBLE
                 plot_canvas_2.visibility= View.VISIBLE
                 val data = intent.getStringExtra("readings")?.split(";")
-                temp_view.setText("${data?.get(0)} °C")
-                hum_view.setText("${data?.get(1)} %")
+                temp_view.text = "${data?.get(0)} °C"
+                hum_view.text = "${data?.get(1)} %"
                 sensor_icon.setImageResource(R.drawable.dht_model)//enable correct icon
             }
             "DHT2" -> {
@@ -82,8 +82,8 @@ class SensorDetailsActivity : AppCompatActivity() {
                 plot_canvas_1.visibility= View.VISIBLE
                 plot_canvas_2.visibility= View.VISIBLE
                 val data = intent.getStringExtra("readings")?.split(";")
-                temp_view.setText("${data?.get(0)} °C")
-                hum_view.setText("${data?.get(1)} %")
+                temp_view.text = "${data?.get(0)} °C"
+                hum_view.text = "${data?.get(1)} %"
                 sensor_icon.setImageResource(R.drawable.dht_model)//enable correct icon
             }
             "DST" -> {
@@ -92,7 +92,7 @@ class SensorDetailsActivity : AppCompatActivity() {
                 plot_canvas_1.visibility= View.VISIBLE
                 plot_canvas_2.visibility= View.GONE
                 val data = intent.getStringExtra("readings")
-                temp_view.setText("${data} °C")
+                temp_view.text = "${data} °C"
                 hum_layout_block.visibility = View.INVISIBLE //hide humidity display
                 sensor_icon.setImageResource(R.drawable.dst_model) //enable correct icon
             }

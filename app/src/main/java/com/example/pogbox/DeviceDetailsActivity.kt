@@ -50,7 +50,7 @@ class DeviceDetailsActivity : AppCompatActivity() {
         val harmonogram_label = findViewById<TextView>(R.id.harmonogram_label_1)
         val sub_window = findViewById<ConstraintLayout>(R.id.sub_window)
         val spin = AnimationUtils.loadAnimation(this,R.anim.spinny)
-        spin.setInterpolator(LinearInterpolator())
+        spin.interpolator = LinearInterpolator()
         //start data refreshing
         val refresher = ApiScheduler(api) //use api object inside scheduler
         refresher.start() //start refreshing data
