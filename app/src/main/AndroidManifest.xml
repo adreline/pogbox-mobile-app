@@ -13,9 +13,6 @@
         android:theme="@style/Theme.Growbox"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".BoxLayoutActivity"
-            android:exported="false" />
-        <activity
             android:name=".DeviceDetailsActivity"
             android:exported="false" />
         <activity

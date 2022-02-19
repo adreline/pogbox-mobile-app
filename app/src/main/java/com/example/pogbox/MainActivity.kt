@@ -173,12 +173,26 @@ class MainActivity : AppCompatActivity() {
     }
     private fun loadCustomLabels(settings: SharedPreferences){
         //class that holds all custom labels
-        val ui_labels = uiLabels(
+        var ui_labels = uiLabels(
             findViewById(R.id.dht1_name),
             findViewById(R.id.dht2_name),
             findViewById(R.id.dst_name),
             findViewById(R.id.lamp_name),
             findViewById(R.id.exhaust_name)
+        )
+        //set all device names according to user settings
+        ui_labels.dht1_label.text= settings.getString("DHT1" , "DHT1" )
+        ui_labels.dht2_label.text= settings.getString("DHT2" , "DHT2" )
+        ui_labels.dst_label.text= settings.getString("DST" , "DST" )
+        ui_labels.exhaust_label.text= settings.getString("EXHAUST" , "EXHAUST" )
+        ui_labels.lamp_label.text= settings.getString("LAMP" , "LAMP" )
+
+        ui_labels = uiLabels(
+            findViewById(R.id.dht1_textView14),
+            findViewById(R.id.dht2_textView8),
+            findViewById(R.id.dst_textView16),
+            findViewById(R.id.growbox_textView9),
+            findViewById(R.id.exhaust_textView11)
         )
         //set all device names according to user settings
         ui_labels.dht1_label.text= settings.getString("DHT1" , "DHT1" )
