@@ -86,7 +86,8 @@ class MainActivity : AppCompatActivity() {
         val refresher = ApiScheduler(just_ui.api) //use api object inside scheduler
         refresher.start() //start refreshing
 
-
+        //refresh DayAverage just once here and not in while(isActive) loop (no need to stress mysql db)
+        just_ui.api.updateData(just_ui.api.DAY_AVERAGE_URL)
         //Start ui refreshing coroutine
         CoroutineScope(IO).launch {
             while (isActive){
@@ -176,12 +177,12 @@ class MainActivity : AppCompatActivity() {
         //updating text data
         //start this as a coroutine to a) do it safely b) dont block main thread while it waits for data
         CoroutineScope(IO).launch{
-            while(just_ui.api.getDht()==""){
+            while(just_ui.api.getDayAverage()==""){
                 delay(10)
             }
             runOnUiThread{
-                just_ui.srednia_temp.text= just_ui.api.getDht().split(";")[0]+" °C"
-                just_ui.srednia_wilgoc.text= just_ui.api.getDht().split(";")[1]+" %"
+                just_ui.srednia_temp.text= just_ui.api.getDayAverage().split(";")[0]+" °C"
+                just_ui.srednia_wilgoc.text= just_ui.api.getDayAverage().split(";")[1]+" %"
             }
         }
         //update connection status
