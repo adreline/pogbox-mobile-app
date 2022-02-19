@@ -1,6 +1,7 @@
 package com.example.pogbox.growboxapi
 
 import android.content.SharedPreferences
+import com.example.pogbox.sensors.DayAverageModel
 
 import com.example.pogbox.sensors.DhtModel
 import com.example.pogbox.sensors.DstModel
@@ -20,7 +21,7 @@ class GrowboxApi(shared: SharedPreferences) {
     var GL_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("GL_URL" , "/" )}"
     var SERVER_INFO = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("SERVER_INFO" , "/" )}"
     var SET_SCHEDULE_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("SET_SCHEDULE_URL" , "/" )}"
-    var SERVER_CONNECTION = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}"
+    var DAY_AVERAGE_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("DAY_AVERAGE_URL" , "/" )}"
 
     //local variables declarations
     private var dst_state=""
@@ -36,6 +37,7 @@ class GrowboxApi(shared: SharedPreferences) {
     private var cpu_temp_info = ""
     private var database_size = ""
     private var connection_state=false
+    private var day_average = ""
 
     private val client=OkHttpClient()
 
@@ -50,6 +52,13 @@ class GrowboxApi(shared: SharedPreferences) {
                 val gson = GsonBuilder().create()
                 connection_state=true
                 when(url){
+                    DAY_AVERAGE_URL -> {
+                        val day_av_data: DayAverageModel = gson.fromJson(body, DayAverageModel::class.java)
+                        //strip unnecessery float precision
+                        val avt_2 = String.format("%.2f", day_av_data.avt)
+                        val avh_2 = String.format("%.2f", day_av_data.avh)
+                        day_average="${avt_2};${avh_2}"
+                    }
                     DHT_URL -> {
                         val dht_data: DhtModel = gson.fromJson(body, DhtModel::class.java)
                         dht_state="${dht_data.temperature};${dht_data.humidity}"
@@ -175,6 +184,9 @@ class GrowboxApi(shared: SharedPreferences) {
     }
     fun getDht(): String {
         return dht_state
+    }
+    fun getDayAverage(): String {
+        return day_average
     }
     fun getDht2(): String {
         return dht2_state

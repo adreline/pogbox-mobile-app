@@ -26,6 +26,7 @@ class SplashScreen : AppCompatActivity() {
         edit.putString("DST_URL" , "/api/getdst.php")
         edit.putString("DHT_URL" , "/api/getdht.php")
         edit.putString("DHT2_URL" , "/api/getdht2.php")
+        edit.putString("DAY_AVERAGE_URL" , "/api/getDayAverage.php")
         edit.putString("GL_URL" , "/api/growlight.php?switch=")
         edit.putString("EXH_URL" , "/api/exhaust.php?switch=")
         edit.putString("SET_SCHEDULE_URL" , "/api/makeschedule.php?")
