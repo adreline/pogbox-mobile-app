@@ -148,8 +148,8 @@ class MainActivity : AppCompatActivity() {
                 delay(10)
             }
             runOnUiThread{
-                just_ui.srednia_temp.text=just_ui.api.getDht()?.split(";")[0]+" °C"
-                just_ui.srednia_wilgoc.text=just_ui.api.getDht()?.split(";")[1]+" %"
+                just_ui.srednia_temp.text= just_ui.api.getDht().split(";")[0]+" °C"
+                just_ui.srednia_wilgoc.text= just_ui.api.getDht().split(";")[1]+" %"
             }
         }
         //update connection status
