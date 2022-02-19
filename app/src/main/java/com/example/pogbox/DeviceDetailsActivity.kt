@@ -61,7 +61,7 @@ class DeviceDetailsActivity : AppCompatActivity() {
             "LAMP"->{
                 lamp_image.visibility = View.VISIBLE //display lamp image
                 //add click listener for saving lamp schedule
-                System.out.println("INSIDE LAMP CASE")
+
                 schedule_save_button?.setOnClickListener {
                     //send new lamp schedule
                     val ton = schedule_from_input.text.toString()
@@ -72,15 +72,12 @@ class DeviceDetailsActivity : AppCompatActivity() {
                 //Start ui refreshing coroutines
                 //crontab data
                 CoroutineScope(Dispatchers.IO).launch {
-                    System.out.println("INSIDE LAMP UI COROUTINE ")
                     while (isActive){
                         //wait for api data to come
                         while(api.getCrontab()==""){
-                            System.out.println("INSIDE LAMP UI COROUTINE DATA LOOP")
                             delay(10)
                         }
                         runOnUiThread {
-                            System.out.println("INSIDE LAMP UI COROUTINE UITHREAD")
                             //update crontab time table inside text input
                             val a = api.getCrontab().replace("pigs w 12 0","").split(" ")
                             val ton = a[1].trim()+":"+ a[0].trim()
