@@ -14,6 +14,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.internal.wait
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var settings : SharedPreferences//this is a global settings instance
@@ -36,18 +37,18 @@ class SettingsActivity : AppCompatActivity() {
         val save_server_ip_button = findViewById<ImageButton>(R.id.server_address_ip_commit)
         val ip_input = findViewById<AutoCompleteTextView>(R.id.server_ip_address_input)
         //enable autocomplete for ip input
-        val countries: Array<out String> = resources.getStringArray(R.array.ip_array)
-        ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries).also { adapter ->
+        val possible_ips: Array<out String> = resources.getStringArray(R.array.ip_array)
+        ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, possible_ips).also { adapter ->
             ip_input.setAdapter(adapter)
         }
 
-        findViewById<TextView>(R.id.content3)
-        val content2 = findViewById<TextView>(R.id.content2)
-        val Content1 = findViewById<TextView>(R.id.Content1)
-        val Content2 = findViewById<TextView>(R.id.Content2)
-        val content4 = findViewById<TextView>(R.id.content4)
-        val content5 = findViewById<TextView>(R.id.content5)
-        val content6 = findViewById<TextView>(R.id.content6)
+        val content3 = findViewById<TextView>(R.id.content3) //server_memory
+        val content2 = findViewById<TextView>(R.id.content2) //dht_ambient
+        val Content1 = findViewById<TextView>(R.id.Content1) //dst
+        val Content2 = findViewById<TextView>(R.id.Content2) //dht_growbox
+        val content4 = findViewById<TextView>(R.id.content4) //database_size
+        val content5 = findViewById<TextView>(R.id.content5) //cpu_temp
+        val content6 = findViewById<TextView>(R.id.content6) //crontab
         //sync data
         api.getGrowlightSchedule()
         api.updateData(api.DHT_URL)
@@ -57,12 +58,20 @@ class SettingsActivity : AppCompatActivity() {
 
         //set up UI
         CoroutineScope(IO).launch{
+
             while(api.getDatabaseInfo()==""){
                 delay(10)
             }
-            runOnUiThread{ content6.text = api.getDatabaseInfo() }
+            runOnUiThread{ content4.text = api.getDatabaseInfo() }
         }
         CoroutineScope(IO).launch{
+            while(api.getCrontab()==""){
+                delay(10)
+            }
+            runOnUiThread{ content6.text = api.getCrontab() }
+        }
+        CoroutineScope(IO).launch{
+            //cpu_temp
             while(api.getCpuTempInfo()==""){
                 delay(10)
             }
@@ -72,7 +81,7 @@ class SettingsActivity : AppCompatActivity() {
             while(api.getSpaceInfo()==""){
                 delay(10)
             }
-            runOnUiThread{ content4.text = api.getSpaceInfo() }
+            runOnUiThread{ content3.text = api.getSpaceInfo() }
         }
         CoroutineScope(IO).launch{
             val old_address = settings.getString("ADDRESS" , "0.0.0.0" )

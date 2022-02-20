@@ -10,7 +10,7 @@
     <string name="dht_ambient">DHT (Ambient)</string>
     <string name="placeholder">N/A</string>
     <string name="harmonogram_n_wiat_a">Harmonogram Światła</string>
-    <string name="server_memory">Server memory</string>
+    <string name="server_memory">Server space</string>
     <string name="database_size">Database Size</string>
     <string name="dht_growbox">DHT (Growbox)</string>
     <string name="uruchom_o_godzinie">Uruchom o godzinie:</string>
