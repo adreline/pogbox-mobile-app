@@ -38,7 +38,9 @@ class justAnUi(val api: GrowboxApi,
                val lamp_model: ImageView,
                val exhaust_fan: ImageView,
                val spin: Animation,
-               val connection_model: ImageView)
+               val connection_model: ImageView,
+                val exhaust_fan_image: ConstraintLayout
+               )
 
 class MainActivity : AppCompatActivity() {
     private lateinit var shared : SharedPreferences//this is a global settings instance
@@ -65,7 +67,8 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.lamp_model_2),
             findViewById(R.id.exhaust_fan_model),
             AnimationUtils.loadAnimation(this,R.anim.spinny),
-            findViewById(R.id.connection_model)
+            findViewById(R.id.connection_model),
+            findViewById(R.id.exhaust_fan)
         )
 
         val refresh_button = findViewById<FloatingActionButton>(R.id.refresh_button)
@@ -81,11 +84,9 @@ class MainActivity : AppCompatActivity() {
         val toolbar_settings_button = findViewById<AppCompatImageView>(R.id.toolbar_settings_button)
         //disable back button (we r in main acc)
         findViewById<AppCompatImageView>(R.id.toolbar_back_button).visibility = View.GONE
-
         //start data refreshing
         val refresher = ApiScheduler(just_ui.api) //use api object inside scheduler
         refresher.start() //start refreshing
-
         //refresh DayAverage just once here and not in while(isActive) loop (no need to stress mysql db)
         just_ui.api.updateData(just_ui.api.DAY_AVERAGE_URL)
         //Start ui refreshing coroutine
@@ -137,31 +138,34 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         server_status_button?.setOnClickListener{
-            showToast("Ostatnia aktualizacja: ${just_ui.api.getDhtUpdate()}")
+            showToast("Ostatnia aktualizacja: ${just_ui.api.getDht()?.time_stamp}")
         }
         //this allows for devices to be steered by long pressing their icons
         exhaust_settings_button?.setOnLongClickListener {
-            if (just_ui.api.getExhaustState()){
+            if (just_ui.api.getExhaust().getState()!!){
                 //switch exhaust off
-                just_ui.api.setExhaustState(false)
+                just_ui.api.getExhaust().setExhaustState(false)
                 showToast("${shared.getString("EXHAUST" , "EXHAUST" )} OFF")
             }else{
                 //switch exhaust on
-                just_ui.api.setExhaustState(true)
+                just_ui.api.getExhaust().setExhaustState(true)
                 showToast("${shared.getString("EXHAUST" , "EXHAUST" )} ON")
             }
             v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
             true }
         lamp_settings_button?.setOnLongClickListener {
-            if (just_ui.api.getGrowlightState()){
-                //switch growlight off
-                just_ui.api.setGrowlightState(false)
-                showToast("${shared.getString("LAMP" , "LAMP" )} OFF")
-            }else{
-                //switch growlight on
-                just_ui.api.setGrowlightState(true)
-                showToast("${shared.getString("LAMP" , "LAMP" )} ON")
-            }
+
+                if (just_ui.api.getGrowlight().getState()!!){
+                    //switch growlight off
+                    just_ui.api.getGrowlight().setGrowlightState(false)
+                    showToast("${shared.getString("LAMP" , "LAMP" )} OFF")
+                }else{
+                    //switch growlight on
+                    just_ui.api.getGrowlight().setGrowlightState(true)
+                    showToast("${shared.getString("LAMP" , "LAMP" )} ON")
+                }
+
+
             v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
             true }
 
@@ -175,16 +179,16 @@ class MainActivity : AppCompatActivity() {
     }
     private fun refreshUi(just_ui: justAnUi){
         //updating text data
-        //start this as a coroutine to a) do it safely b) dont block main thread while it waits for data
-        CoroutineScope(IO).launch{
-            while(just_ui.api.getDayAverage()==""){
-                delay(10)
-            }
-            runOnUiThread{
-                just_ui.srednia_temp.text= just_ui.api.getDayAverage().split(";")[0]+" °C"
-                just_ui.srednia_wilgoc.text= just_ui.api.getDayAverage().split(";")[1]+" %"
-            }
-        }
+                just_ui.api.getDayAverage()?.let {
+                    runOnUiThread{
+                        //strip unnecessery float precision
+                        val avt = String.format("%.2f", just_ui.api.getDayAverage()?.avt)
+                        val avh = String.format("%.2f", just_ui.api.getDayAverage()?.avh)
+                        just_ui.srednia_temp.text= "${avt} °C"
+                        just_ui.srednia_wilgoc.text= "${avh} %"
+                    }
+                }
+
         //update connection status
         if(just_ui.api.getConnectionState()){
             just_ui.connection_model.setImageResource(R.drawable.signal_online)
@@ -192,17 +196,26 @@ class MainActivity : AppCompatActivity() {
             just_ui.connection_model.setImageResource(R.drawable.signal_offline)
         }
         //updating fan animations
-        if(just_ui.api.getExhaustState()){
-            just_ui.exhaust_fan.startAnimation(just_ui.spin)
-        }else{
-            just_ui.exhaust_fan.clearAnimation()
+        just_ui.api.getExhaust().getState()?.let {
+            if(just_ui.api.getExhaust().getState()!!){
+                //just_ui.exhaust_fan_image.alpha=1.0.toFloat()
+                just_ui.exhaust_fan.startAnimation(just_ui.spin)
+            }else{
+                //just_ui.exhaust_fan_image.alpha=1.0.toFloat()
+                just_ui.exhaust_fan.clearAnimation()
+            }
         }
-        //updating lamp image to match it's state
-        if(just_ui.api.getGrowlightState()){
-            just_ui.lamp_model.setImageResource(R.drawable.lamp_model_on)
-        }else{
-            just_ui.lamp_model.setImageResource(R.drawable.lamp_model_off)
+        just_ui.api.getGrowlight().getState()?.let {
+            //updating lamp image to match it's state
+            if(just_ui.api.getGrowlight().getState()!!){
+                //just_ui.lamp_model.alpha=1.0.toFloat()
+                just_ui.lamp_model.setImageResource(R.drawable.lamp_model_on)
+            }else{
+                //just_ui.lamp_model.alpha=1.0.toFloat()
+                just_ui.lamp_model.setImageResource(R.drawable.lamp_model_off)
+            }
         }
+
     }
     private fun loadCustomLabels(settings: SharedPreferences){
         //class that holds all custom labels

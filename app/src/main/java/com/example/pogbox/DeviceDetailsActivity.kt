@@ -15,6 +15,7 @@ import com.example.pogbox.growboxapi.ApiScheduler
 import com.example.pogbox.growboxapi.GrowboxApi
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.coroutines.*
+import okhttp3.Dispatcher
 
 class DeviceDetailsActivity : AppCompatActivity() {
     lateinit var shared : SharedPreferences//this is a global settings instance
@@ -54,7 +55,7 @@ class DeviceDetailsActivity : AppCompatActivity() {
         //start data refreshing
         val refresher = ApiScheduler(api) //use api object inside scheduler
         refresher.start() //start refreshing data
-        api.getGrowlightSchedule() //fetch crontab info
+        api.getGrowlight().updateGrowlightSchedule() //fetch crontab info
         device_name_input.setText(device_friendly_name)
         //setup UI according to which is chosen
         when(device_discrete_name){
@@ -66,7 +67,7 @@ class DeviceDetailsActivity : AppCompatActivity() {
                     //send new lamp schedule
                     val ton = schedule_from_input.text.toString()
                     val tof = schedule_untill_input.text.toString()
-                    api.setGrowlightSchedule(ton,tof)
+                    api.getGrowlight().setGrowlightSchedule(ton,tof)
                     showToast("Harmonogram wysłany")
                 }
                 //Start ui refreshing coroutines
@@ -74,17 +75,27 @@ class DeviceDetailsActivity : AppCompatActivity() {
                 CoroutineScope(Dispatchers.IO).launch {
                     while (isActive){
                         //wait for api data to come
-                        while(api.getCrontab()==""){
-                            delay(10)
+
+                          val wait_for_data = CoroutineScope(Dispatchers.IO).launch {
+                                while (isActive){
+                                    api.getGrowlight().getSchedule()?.let {
+                                        this.cancel()
+                                    }
+                                    delay(10)
+                                }
+                            }
+                        wait_for_data.start()
+                        wait_for_data.invokeOnCompletion {
+                            runOnUiThread {
+                                //update crontab time table inside text input
+                                val a = api.getGrowlight().getSchedule()?.replace("pigs w 12 0","")?.split(" ")
+                                val ton = a?.get(1)!!.trim()+":"+ a.get(0).trim()
+                                val tof = a.get(6).trim()+":"+ a.get(5).trim()
+                                schedule_from_input.setText(ton)
+                                schedule_untill_input.setText(tof)
+                            }
                         }
-                        runOnUiThread {
-                            //update crontab time table inside text input
-                            val a = api.getCrontab().replace("pigs w 12 0","").split(" ")
-                            val ton = a[1].trim()+":"+ a[0].trim()
-                            val tof = a[6].trim()+":"+ a[5].trim()
-                            schedule_from_input.setText(ton)
-                            schedule_untill_input.setText(tof)
-                        }
+
                         delay(500)
                     }
                 }
@@ -92,24 +103,39 @@ class DeviceDetailsActivity : AppCompatActivity() {
                 CoroutineScope(Dispatchers.IO).launch {
                     while (isActive){
                         //wait for api data to come
-                        runOnUiThread {
-                            //update lamp image state
-                            if(api.getGrowlightState()){
-                                //set image drawable from lamp OFF to lamp ON
-                                lamp_image.setImageResource(R.drawable.lamp_model_on)
-                                //set switch to true
-                                listener_flag=true //block switch state listener
-                                device_switch.isChecked = true
-                                listener_flag=false
-                            }else{
-                                //set image drawable from lamp ON to lamp OFF
-                                lamp_image.setImageResource(R.drawable.lamp_model_off)
-                                //set switch to false
-                                listener_flag=true //block switch state listener
-                                device_switch.isChecked = false
-                                listener_flag=false
+                        val wait_for_data = CoroutineScope(Dispatchers.IO).launch {
+                            while (isActive){
+                                api.getGrowlight().getState()?.let {
+                                    this.cancel()
+                                }
+                                delay(10)
                             }
                         }
+                        wait_for_data.start()
+                        wait_for_data.invokeOnCompletion {
+                            //update lamp image state
+                            runOnUiThread {
+                                if(api.getGrowlight().getState()!!){
+                                    //set image drawable from lamp OFF to lamp ON
+                                    lamp_image.imageAlpha=1
+                                    lamp_image.setImageResource(R.drawable.lamp_model_on)
+                                    //set switch to true
+                                    listener_flag=true //block switch state listener
+                                    device_switch.isChecked = true
+                                    listener_flag=false
+                                }else{
+                                    //set image drawable from lamp ON to lamp OFF
+                                    lamp_image.imageAlpha=1
+                                    lamp_image.setImageResource(R.drawable.lamp_model_off)
+                                    //set switch to false
+                                    listener_flag=true //block switch state listener
+                                    device_switch.isChecked = false
+                                    listener_flag=false
+                                }
+                            }
+
+                        }
+
                         delay(500)
                     }
                 }
@@ -124,24 +150,35 @@ class DeviceDetailsActivity : AppCompatActivity() {
                 sub_window.visibility = View.GONE
                 //Start ui refreshing coroutine
                 CoroutineScope(Dispatchers.IO).launch {
-                    while (isActive){
+                    while (isActive) {
+                        val wait_for_data = CoroutineScope(Dispatchers.IO).launch {
+                            while (isActive) {
+                                api.getExhaust().getState()?.let {
+                                    this.cancel()
+                                }
+                                delay(10)
+                            }
+                        }
+                        wait_for_data.start()
+                        wait_for_data.invokeOnCompletion {
                         runOnUiThread {
-                            if(api.getExhaustState()){
+                            if (api.getExhaust().getState()!!) {
                                 //Start spinning animation, the fan is ON
                                 fan_blades_image.startAnimation(spin)
                                 //set switch to true
-                                listener_flag=true //block switch state listener
+                                listener_flag = true //block switch state listener
                                 device_switch.isChecked = true
-                                listener_flag=false
-                            }else{
+                                listener_flag = false
+                            } else {
                                 //Stop spinning animation, the fan is OFF
                                 fan_blades_image.clearAnimation()
                                 //set switch to false
-                                listener_flag=true //block switch state listener
+                                listener_flag = true //block switch state listener
                                 device_switch.isChecked = false
-                                listener_flag=false
+                                listener_flag = false
                             }
                         }
+                    }
                         delay(500)
                     }
                 }
@@ -191,7 +228,9 @@ class DeviceDetailsActivity : AppCompatActivity() {
     }
 
 
-
+    /*
+    Helper functions
+    */
     private fun showToast(text: String){
         Toast.makeText(
             this@DeviceDetailsActivity, text,
@@ -204,12 +243,10 @@ class DeviceDetailsActivity : AppCompatActivity() {
     private fun growlightSwitch(isChecked:Boolean,api:GrowboxApi){
         if (isChecked){
             //switch growlight on
-            api.setGrowlightState(true)
-            //growlight_shine.visibility= View.VISIBLE
+            api.getGrowlight().setGrowlightState(true)
         }else{
             //switch growlight off
-            api.setGrowlightState(false)
-            //growlight_shine.visibility= View.INVISIBLE
+            api.getGrowlight().setGrowlightState(false)
         }
 
         val message = if (isChecked) "Grow light:ON" else "Grow light:OFF"
@@ -218,12 +255,10 @@ class DeviceDetailsActivity : AppCompatActivity() {
     private fun exhaustfanSwitch(isChecked:Boolean,api:GrowboxApi){
         if (isChecked){
             //switch growlight on
-            api.setExhaustState(true)
-            //exhaust_fan.startAnimation(just_ui.spin)
+            api.getExhaust().setExhaustState(true)
         }else{
             //switch growlight off
-            api.setExhaustState(false)
-            //exhaust_fan.clearAnimation()
+            api.getExhaust().setExhaustState(false)
         }
         val message = if (isChecked) "Wywiew:ON" else "Wywiew:OFF"
         showToast(message)
