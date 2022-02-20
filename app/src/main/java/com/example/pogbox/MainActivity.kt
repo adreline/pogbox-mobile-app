@@ -198,20 +198,20 @@ class MainActivity : AppCompatActivity() {
         //updating fan animations
         just_ui.api.getExhaust().getState()?.let {
             if(just_ui.api.getExhaust().getState()!!){
-                //just_ui.exhaust_fan_image.alpha=1.0.toFloat()
+                just_ui.exhaust_fan_image.alpha=1.0.toFloat()
                 just_ui.exhaust_fan.startAnimation(just_ui.spin)
             }else{
-                //just_ui.exhaust_fan_image.alpha=1.0.toFloat()
+                just_ui.exhaust_fan_image.alpha=1.0.toFloat()
                 just_ui.exhaust_fan.clearAnimation()
             }
         }
         just_ui.api.getGrowlight().getState()?.let {
             //updating lamp image to match it's state
             if(just_ui.api.getGrowlight().getState()!!){
-                //just_ui.lamp_model.alpha=1.0.toFloat()
+                just_ui.lamp_model.alpha=1.0.toFloat()
                 just_ui.lamp_model.setImageResource(R.drawable.lamp_model_on)
             }else{
-                //just_ui.lamp_model.alpha=1.0.toFloat()
+                just_ui.lamp_model.alpha=1.0.toFloat()
                 just_ui.lamp_model.setImageResource(R.drawable.lamp_model_off)
             }
         }

@@ -267,7 +267,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/exhaust_fan"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:alpha="0.2">
 
                     <ImageView
                         android:id="@+id/exhaust_fan_model"
@@ -310,6 +311,7 @@
                     android:id="@+id/lamp_model_2"
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
+                    android:alpha="0.2"
                     android:visibility="visible"
                     app:srcCompat="@drawable/lamp_model_on" />
 
