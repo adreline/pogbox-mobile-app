@@ -47,6 +47,7 @@ class DeviceDetailsActivity : AppCompatActivity() {
         val lamp_image = findViewById<ImageView>(R.id.lamp_model)
         val fan_blades_image = findViewById<ImageView>(R.id.fan_blades)
         val fan_chassi_image = findViewById<ImageView>(R.id.fan_chassi)
+        val fan_model = findViewById<ConstraintLayout>(R.id.fan_model)
         val schedule_input_layout = findViewById<LinearLayout>(R.id.schedule_input_layout)
         val harmonogram_label = findViewById<TextView>(R.id.harmonogram_label_1)
         val sub_window = findViewById<ConstraintLayout>(R.id.sub_window)
@@ -117,7 +118,7 @@ class DeviceDetailsActivity : AppCompatActivity() {
                             runOnUiThread {
                                 if(api.getGrowlight().getState()!!){
                                     //set image drawable from lamp OFF to lamp ON
-                                    lamp_image.imageAlpha=1
+                                    lamp_image.alpha=1.0.toFloat()
                                     lamp_image.setImageResource(R.drawable.lamp_model_on)
                                     //set switch to true
                                     listener_flag=true //block switch state listener
@@ -125,7 +126,7 @@ class DeviceDetailsActivity : AppCompatActivity() {
                                     listener_flag=false
                                 }else{
                                     //set image drawable from lamp ON to lamp OFF
-                                    lamp_image.imageAlpha=1
+                                    lamp_image.alpha=1.0.toFloat()
                                     lamp_image.setImageResource(R.drawable.lamp_model_off)
                                     //set switch to false
                                     listener_flag=true //block switch state listener
@@ -164,6 +165,7 @@ class DeviceDetailsActivity : AppCompatActivity() {
                         runOnUiThread {
                             if (api.getExhaust().getState()!!) {
                                 //Start spinning animation, the fan is ON
+                                fan_model.alpha=1.0.toFloat()
                                 fan_blades_image.startAnimation(spin)
                                 //set switch to true
                                 listener_flag = true //block switch state listener
@@ -171,6 +173,7 @@ class DeviceDetailsActivity : AppCompatActivity() {
                                 listener_flag = false
                             } else {
                                 //Stop spinning animation, the fan is OFF
+                                fan_model.alpha=1.0.toFloat()
                                 fan_blades_image.clearAnimation()
                                 //set switch to false
                                 listener_flag = true //block switch state listener

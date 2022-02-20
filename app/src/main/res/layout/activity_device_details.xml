@@ -17,11 +17,11 @@
         android:layout_height="52dp"
         android:scaleX="2"
         android:scaleY="2"
-        app:layout_constraintBottom_toBottomOf="@+id/fan_chassi"
+        app:layout_constraintBottom_toBottomOf="@id/fan_model"
         app:layout_constraintEnd_toStartOf="@+id/lamp_model"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include2"
-        app:layout_constraintVertical_bias="0.45" />
+        app:layout_constraintVertical_bias="0.43" />
 
     <EditText
         android:id="@+id/device_name_input"
@@ -56,6 +56,7 @@
         android:id="@+id/lamp_model"
         android:layout_width="240dp"
         android:layout_height="134dp"
+        android:alpha="0.2"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,7 +74,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fan_chassi"
+        app:layout_constraintTop_toBottomOf="@id/fan_model"
         app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -216,28 +217,35 @@
         app:layout_constraintStart_toStartOf="@+id/device_switch"
         tools:ignore="TextContrastCheck" />
 
-    <ImageView
-        android:id="@+id/fan_blades"
-        android:layout_width="124dp"
-        android:layout_height="136dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/fan_chassi"
-        app:layout_constraintEnd_toEndOf="@+id/fan_chassi"
-        app:layout_constraintStart_toStartOf="@+id/fan_chassi"
-        app:layout_constraintTop_toTopOf="@+id/fan_chassi"
-        app:srcCompat="@drawable/fan_blades" />
-
-    <ImageView
-        android:id="@+id/fan_chassi"
-        android:layout_width="147dp"
-        android:layout_height="152dp"
-        android:visibility="invisible"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fan_model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0.2"
         app:layout_constraintBottom_toBottomOf="@+id/lamp_model"
         app:layout_constraintEnd_toEndOf="@+id/lamp_model"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="@+id/lamp_model"
-        app:layout_constraintTop_toTopOf="@+id/lamp_model"
-        app:srcCompat="@drawable/fan_chassi" />
+        app:layout_constraintTop_toTopOf="@+id/lamp_model">
+
+        <ImageView
+            android:id="@+id/fan_blades"
+            android:layout_width="124dp"
+            android:layout_height="136dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/fan_chassi"
+            app:layout_constraintEnd_toEndOf="@+id/fan_chassi"
+            app:layout_constraintStart_toStartOf="@+id/fan_chassi"
+            app:layout_constraintTop_toTopOf="@+id/fan_chassi"
+            app:srcCompat="@drawable/fan_blades" />
+
+        <ImageView
+            android:id="@+id/fan_chassi"
+            android:layout_width="147dp"
+            android:layout_height="152dp"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/fan_chassi" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageButton
         android:id="@+id/save_name_button_2"
