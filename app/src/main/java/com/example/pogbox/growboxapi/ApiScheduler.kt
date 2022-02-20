@@ -29,8 +29,8 @@ class ApiScheduler(private val service: GrowboxApi, private val interval: Long =
             service.updateData(service.DHT_URL)
             service.updateData(service.DHT2_URL)
             service.updateData(service.DST_URL)
-            service.updateGrowlightState()
-            service.updateExhaustState()
+            service.getGrowlight().updateGrowlightState()
+            service.getExhaust().updateExhaustState()
             delay(interval)
         }
         println("coroutine done")

@@ -12,6 +12,8 @@ import android.widget.*
 import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.pogbox.sensors.DhtModel
+import com.example.pogbox.sensors.DstModel
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
@@ -69,9 +71,11 @@ class SensorDetailsActivity : AppCompatActivity() {
                 loadImage(Uri.parse("${plots_dir}dht1_h_plot.svg"),plot_canvas_2)
                 plot_canvas_1.visibility= View.VISIBLE
                 plot_canvas_2.visibility= View.VISIBLE
-                val data = intent.getStringExtra("readings")?.split(";")
-                temp_view.text = "${data?.get(0)} °C"
-                hum_view.text = "${data?.get(1)} %"
+
+                val data: DhtModel = intent.getSerializableExtra("readings") as DhtModel
+
+                temp_view.text = "${data.temperature} °C"
+                hum_view.text = "${data.humidity} %"
                 sensor_icon.setImageResource(R.drawable.dht_model)//enable correct icon
             }
             "DHT2" -> {
@@ -81,9 +85,10 @@ class SensorDetailsActivity : AppCompatActivity() {
                 loadImage(Uri.parse("${plots_dir}dht2_h_plot.svg"),plot_canvas_2)
                 plot_canvas_1.visibility= View.VISIBLE
                 plot_canvas_2.visibility= View.VISIBLE
-                val data = intent.getStringExtra("readings")?.split(";")
-                temp_view.text = "${data?.get(0)} °C"
-                hum_view.text = "${data?.get(1)} %"
+                val data: DhtModel = intent.getSerializableExtra("readings") as DhtModel
+
+                temp_view.text = "${data.temperature} °C"
+                hum_view.text = "${data.humidity} %"
                 sensor_icon.setImageResource(R.drawable.dht_model)//enable correct icon
             }
             "DST" -> {
@@ -91,8 +96,10 @@ class SensorDetailsActivity : AppCompatActivity() {
                 loadImage(Uri.parse("${plots_dir}dst_t_plot.svg"),plot_canvas_1)
                 plot_canvas_1.visibility= View.VISIBLE
                 plot_canvas_2.visibility= View.GONE
-                val data = intent.getStringExtra("readings")
-                temp_view.text = "${data} °C"
+
+                val data:DstModel = intent.getSerializableExtra("readings") as DstModel
+
+                temp_view.text = "${data.temperature} °C"
                 hum_layout_block.visibility = View.INVISIBLE //hide humidity display
                 sensor_icon.setImageResource(R.drawable.dst_model) //enable correct icon
             }

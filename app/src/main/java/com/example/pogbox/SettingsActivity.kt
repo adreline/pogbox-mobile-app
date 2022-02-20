@@ -9,11 +9,10 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.pogbox.growboxapi.GrowboxApi
+import com.example.pogbox.sensors.DstModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import okhttp3.internal.wait
 
 class SettingsActivity : AppCompatActivity() {
@@ -50,7 +49,7 @@ class SettingsActivity : AppCompatActivity() {
         val content5 = findViewById<TextView>(R.id.content5) //cpu_temp
         val content6 = findViewById<TextView>(R.id.content6) //crontab
         //sync data
-        api.getGrowlightSchedule()
+        api.getGrowlight().updateGrowlightSchedule()
         api.updateData(api.DHT_URL)
         api.updateData(api.DHT2_URL)
         api.updateData(api.DST_URL)
@@ -58,30 +57,30 @@ class SettingsActivity : AppCompatActivity() {
 
         //set up UI
         CoroutineScope(IO).launch{
+            while (isActive){ //while coroutine is running
+                api.getGrowlight().getSchedule()?.let { //only enter this block when data has came
+                    runOnUiThread{
+                        content6.text = api.getGrowlight().getSchedule()
+                    }
+                    this.cancel() //data came, close the coroutine
+                }
+                delay(10)
+            }
+        }
 
-            while(api.getDatabaseInfo()==""){
-                delay(10)
-            }
-            runOnUiThread{ content4.text = api.getDatabaseInfo() }
-        }
         CoroutineScope(IO).launch{
-            while(api.getCrontab()==""){
+            while (isActive){ //while coroutine is running
+                api.getServer()?.let { //only enter this block when data has came
+                    runOnUiThread{
+                        content5.text = api.getServer()?.cpu_temp.toString()
+                        content3.text = "Total Size: ${api.getServer()?.space_data?.get(0)} Used: ${api.getServer()?.space_data?.get(1)} Available: ${api.getServer()?.space_data?.get(2)} Use%: ${api.getServer()?.space_data?.get(3)}  "
+                        content4.text = api.getServer()?.dbdata.toString()
+                    }
+                    this.cancel() //data came, close the coroutine
+                }
                 delay(10)
             }
-            runOnUiThread{ content6.text = api.getCrontab() }
-        }
-        CoroutineScope(IO).launch{
-            //cpu_temp
-            while(api.getCpuTempInfo()==""){
-                delay(10)
-            }
-            runOnUiThread{ content5.text = api.getCpuTempInfo() }
-        }
-        CoroutineScope(IO).launch{
-            while(api.getSpaceInfo()==""){
-                delay(10)
-            }
-            runOnUiThread{ content3.text = api.getSpaceInfo() }
+
         }
         CoroutineScope(IO).launch{
             val old_address = settings.getString("ADDRESS" , "0.0.0.0" )
@@ -89,25 +88,33 @@ class SettingsActivity : AppCompatActivity() {
                 ip_input.setText(old_address)
             }
         }
+        CoroutineScope(IO).launch{
 
-        CoroutineScope(IO).launch{
-            while(api.getDst()==""){
-               delay(10)
-            }
-            runOnUiThread{ Content1.text = api.getDst()+"\n"+api.getDstUpdate() }
-
-        }
-        CoroutineScope(IO).launch{
-            while(api.getDht()==""){
-               delay(10)
-            }
-            runOnUiThread { Content2.text = api.getDht()+"\n"+api.getDhtUpdate() }
-        }
-        CoroutineScope(IO).launch{
-            while(api.getDht2()==""){
+            while (isActive){ //while coroutine is running
+                api.getDst()?.let { //only enter this block when data has came
+                    runOnUiThread{ Content1.text = "${api.getDst()?.temperature}\n${api.getDst()?.time_stamp}" }
+                    this.cancel() //data came, close the coroutine
+                }
                 delay(10)
             }
-            runOnUiThread { content2.text = api.getDht2()+"\n"+api.getDht2Update() }
+        }
+        CoroutineScope(IO).launch{
+            while (isActive){ //while coroutine is running
+                api.getDht()?.let { //only enter this block when data has came
+                    runOnUiThread{ Content2.text = "${api.getDht()?.temperature};${api.getDht()?.humidity}\n${api.getDht()?.time_stamp}" }
+                    this.cancel() //data came, close the coroutine
+                }
+                delay(10)
+            }
+        }
+        CoroutineScope(IO).launch{
+            while (isActive){ //while coroutine is running
+                api.getDht2()?.let { //only enter this block when data has came
+                    runOnUiThread{ content2.text = "${api.getDht2()?.temperature};${api.getDht2()?.humidity}\n${api.getDht2()?.time_stamp}" }
+                    this.cancel() //data came, close the coroutine
+                }
+                delay(10)
+            }
         }
         //listeners
         save_server_ip_button?.setOnClickListener{

@@ -1,14 +1,12 @@
 package com.example.pogbox.growboxapi
 
 import android.content.SharedPreferences
-import com.example.pogbox.sensors.DayAverageModel
+import com.example.pogbox.sensors.*
 
-import com.example.pogbox.sensors.DhtModel
-import com.example.pogbox.sensors.DstModel
-import com.example.pogbox.sensors.ServerInfoModel
 import okhttp3.*
 import java.io.IOException
 import com.google.gson.GsonBuilder
+import okhttp3.internal.notify
 
 
 class GrowboxApi(shared: SharedPreferences) {
@@ -24,20 +22,17 @@ class GrowboxApi(shared: SharedPreferences) {
     var DAY_AVERAGE_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("DAY_AVERAGE_URL" , "/" )}"
 
     //local variables declarations
-    private var dst_state=""
-    private var dht_state=""
-    private var dht2_state=""
-    private var last_updated_dht=""
-    private var last_updated_dht2=""
-    private var last_updated_dst=""
-    private var growlight_state=true
-    private var exhaust_state=true
-    private var crontab = ""
-    private var space_info = ""
-    private var cpu_temp_info = ""
-    private var database_size = ""
+    private var dst:DstModel? = null
+    private var dht1:DhtModel? = null
+    private var dht2:DhtModel? = null
+    private var server:ServerInfoModel? = null
+    private var day_average:DayAverageModel? = null
+
+    private var growlight = GrowlightModel(GL_URL,SET_SCHEDULE_URL,GET_SCHEDULE_URL)
+    private var exhaust_fan = ExhaustFanModel(EXH_URL)
+
     private var connection_state=false
-    private var day_average = ""
+
 
     private val client=OkHttpClient()
 
@@ -53,164 +48,46 @@ class GrowboxApi(shared: SharedPreferences) {
                 connection_state=true
                 when(url){
                     DAY_AVERAGE_URL -> {
-                        val day_av_data: DayAverageModel = gson.fromJson(body, DayAverageModel::class.java)
-                        //strip unnecessery float precision
-                        val avt_2 = String.format("%.2f", day_av_data.avt)
-                        val avh_2 = String.format("%.2f", day_av_data.avh)
-                        day_average="${avt_2};${avh_2}"
+                        day_average = gson.fromJson(body, DayAverageModel::class.java)
                     }
                     DHT_URL -> {
-                        val dht_data: DhtModel = gson.fromJson(body, DhtModel::class.java)
-                        dht_state="${dht_data.temperature};${dht_data.humidity}"
-                        last_updated_dht= dht_data.time_stamp
+                        dht1 = gson.fromJson(body, DhtModel::class.java)
                     }
                     DHT2_URL -> {
-                        val dht2_data: DhtModel = gson.fromJson(body, DhtModel::class.java)
-                        dht2_state="${dht2_data.temperature};${dht2_data.humidity}"
-                        last_updated_dht2=dht2_data.time_stamp
+                        dht2 = gson.fromJson(body, DhtModel::class.java)
                     }
                     DST_URL -> {
-                        val dst_data: DstModel = gson.fromJson(body, DstModel::class.java)
-                        dst_state="${dst_data.temperature}"
-                        last_updated_dst = dst_data.time_stamp
+                        dst = gson.fromJson(body, DstModel::class.java)
                     }
                     SERVER_INFO -> {
-                        val server_info = gson.fromJson(body, ServerInfoModel::class.java)
-                        space_info = "Total Size: ${server_info.space_data[0]} Used: ${server_info.space_data[1]} Available: ${server_info.space_data[2]} Use%: ${server_info.space_data[3]}  "
-                        cpu_temp_info = "${server_info.cpu_temp} °C"
-                        database_size = "${server_info.dbdata} MB"
+                        server = gson.fromJson(body, ServerInfoModel::class.java)
                     }
                 }
             }
         })
 
     }
-
-
-
-    fun setGrowlightState(state:Boolean){
-        val trans = if (state) "on" else "off"
-        val request = Request.Builder().url(GL_URL+trans).build()
-        client.newCall(request).enqueue(object: Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                println(e)
-            }
-            override fun onResponse(call: Call, response: Response) {
-                //some time in future use it to check response (if settings were applied)
-                //val body = response.body?.string()
-                growlight_state = state
-            }
-        })
+    //--------GETTERS-----------
+    fun getDht(): DhtModel? {
+        return dht1
     }
-    fun updateGrowlightState(){
-        val request = Request.Builder().url(GL_URL+"state").build()
-        client.newCall(request).enqueue(object: Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                println(e)
-            }
-            override fun onResponse(call: Call, response: Response) {
-                val body = response.body?.string()
-                growlight_state = body?.trim()=="0"
-            }
-
-        })
+    fun getDht2(): DhtModel? {
+        return dht2
     }
-
-    fun setExhaustState(state:Boolean){
-        val trans = if (state) "on" else "off"
-        val request = Request.Builder().url(EXH_URL+trans).build()
-        client.newCall(request).enqueue(object: Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                println(e)
-            }
-            override fun onResponse(call: Call, response: Response) {
-                //some time in future use it to check response (if settings were applied)
-                //val body = response.body?.string()
-                exhaust_state = state
-            }
-        })
+    fun getDst(): DstModel? {
+        return dst
     }
-    fun updateExhaustState(){
-        val request = Request.Builder().url(EXH_URL+"state").build()
-        client.newCall(request).enqueue(object: Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                println(e)
-            }
-            override fun onResponse(call: Call, response: Response) {
-                val body = response.body?.string()
-                exhaust_state = body?.trim()=="0"
-            }
-
-        })
+    fun getGrowlight(): GrowlightModel {
+        return growlight
     }
-
-    fun setGrowlightSchedule(hour_on: String,hour_off: String){
-        val a =  hour_on.split(":")
-        val b = hour_off.split(":")
-        val req = SET_SCHEDULE_URL+"houre=${a.get(0)}&minutee=${a.get(1)}&hourn=${b.get(0)}&minuten=${b.get(1)}"
-        val request = Request.Builder().url(req).build()
-        client.newCall(request).enqueue(object: Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                println(e)
-            }
-            override fun onResponse(call: Call, response: Response) {
-                val body = response.body?.string()
-                println(body)
-            }
-
-        })
+    fun getServer(): ServerInfoModel?{
+        return server
     }
-    fun getGrowlightSchedule(){
-        val request = Request.Builder().url(GET_SCHEDULE_URL).build()
-        client.newCall(request).enqueue(object: Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                println(e)
-            }
-            override fun onResponse(call: Call, response: Response) {
-                crontab = response.body?.string().toString().trim()
-            }
-        })
-    }
-
-
-    fun getCpuTempInfo(): String{
-        return cpu_temp_info
-    }
-    fun getDatabaseInfo(): String{
-        return database_size
-    }
-    fun getSpaceInfo(): String{
-        return space_info
-    }
-    fun getDht(): String {
-        return dht_state
-    }
-    fun getDayAverage(): String {
+    fun getDayAverage(): DayAverageModel? {
         return day_average
     }
-    fun getDht2(): String {
-        return dht2_state
-    }
-    fun getDst(): String {
-        return dst_state
-    }
-    fun getGrowlightState(): Boolean {
-        return growlight_state
-    }
-    fun getExhaustState(): Boolean {
-        return exhaust_state
-    }
-    fun getDhtUpdate(): String{
-        return last_updated_dht
-    }
-    fun getDht2Update(): String{
-        return last_updated_dht2
-    }
-    fun getDstUpdate(): String{
-        return last_updated_dst
-    }
-    fun getCrontab(): String{
-        return crontab
+    fun getExhaust(): ExhaustFanModel {
+        return exhaust_fan
     }
     fun getConnectionState(): Boolean {
         return connection_state
