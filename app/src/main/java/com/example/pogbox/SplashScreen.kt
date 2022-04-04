@@ -23,15 +23,15 @@ class SplashScreen : AppCompatActivity() {
         //this loads global settings under name of default
         shared = getSharedPreferences("default" , Context.MODE_PRIVATE)
         val edit = shared.edit() //this sets settings instance to edit mode
-        edit.putString("DST_URL" , "/api/getdst.php")
-        edit.putString("DHT_URL" , "/api/getdht.php")
-        edit.putString("DHT2_URL" , "/api/getdht2.php")
-        edit.putString("DAY_AVERAGE_URL" , "/api/getDayAverage.php")
-        edit.putString("GL_URL" , "/api/growlight.php?switch=")
-        edit.putString("EXH_URL" , "/api/exhaust.php?switch=")
-        edit.putString("SET_SCHEDULE_URL" , "/api/makeschedule.php?")
-        edit.putString("GET_SCHEDULE_URL" , "/api/getschedule.php")
-        edit.putString("SERVER_INFO" , "/api/getsysteminfo.php")
+        edit.putString("DST_URL" , "/api/getdst")
+        edit.putString("DHT_URL" , "/api/getdht")
+        edit.putString("DHT2_URL" , "/api/getdht2")
+        edit.putString("DAY_AVERAGE_URL" , "/api?method=day_average")
+        edit.putString("GL_URL" , "/api/growlight?switch=")
+        edit.putString("EXH_URL" , "/api/exhaust?switch=")
+        edit.putString("SET_SCHEDULE_URL" , "/api/growlight/schedule?method=set&")
+        edit.putString("GET_SCHEDULE_URL" , "/api/growlight/schedule?method=get")
+        edit.putString("SERVER_INFO" , "/api/system")
         edit.putString("PLOTS_DIR" , "/api/plots/")
         edit.apply() //this saves default configuration
 

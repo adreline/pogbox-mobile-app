@@ -5,7 +5,7 @@ import kotlinx.coroutines.*
 import java.util.concurrent.Executors
 import kotlin.coroutines.CoroutineContext
 
-class ApiScheduler(private val service: GrowboxApi, private val interval: Long = 1000, private val initialDelay: Long? = 0) :
+class ApiScheduler(private val service: GrowboxApi, private val interval: Long = 5000, private val initialDelay: Long? = 0) :
     CoroutineScope {
 
     private val job = Job()

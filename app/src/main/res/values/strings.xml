@@ -39,4 +39,5 @@
     <string name="rozmieszczenie_element_w_w_growbox_sie">Zobacz rozmieszczenie elementów w growbox\'sie</string>
     <string name="growbox">Growbox</string>
     <string name="model">Model</string>
+    <string name="server_port">Server port</string>
 </resources>

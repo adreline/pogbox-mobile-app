@@ -47,7 +47,7 @@ class SensorDetailsActivity : AppCompatActivity() {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
-        val plots_dir = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("PLOTS_DIR" , "/" )}" //resolve path from settings
+        val plots_dir = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}:${shared.getString("PORT" , "6969" )}${shared.getString("PLOTS_DIR" , "/" )}" //resolve path from settings
         val sensor_discrete_name=intent.getStringExtra("sensor")
         val sensor_friendly_name=shared.getString(sensor_discrete_name,sensor_discrete_name) //load friendly device name, if not set, fallback to discrete device name
         //setup ui

@@ -34,7 +34,11 @@ class SettingsActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.toolbar_title).text="Ustawienia"
         //other
         val save_server_ip_button = findViewById<ImageButton>(R.id.server_address_ip_commit)
+        val save_server_port_button = findViewById<ImageButton>(R.id.server_port_commit)
+
         val ip_input = findViewById<AutoCompleteTextView>(R.id.server_ip_address_input)
+        val port_input = findViewById<AutoCompleteTextView>(R.id.server_port_input)
+
         //enable autocomplete for ip input
         val possible_ips: Array<out String> = resources.getStringArray(R.array.ip_array)
         ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, possible_ips).also { adapter ->
@@ -123,6 +127,13 @@ class SettingsActivity : AppCompatActivity() {
             edit.putString("ADDRESS",new_server_ip)
             edit.apply() //this saves configuration
             showToast("IP Zapisane")
+        }
+        save_server_port_button?.setOnClickListener{
+            val new_server_port = port_input.text.toString()
+            val edit = settings.edit() //this sets settings instance to edit mode
+            edit.putString("PORT",new_server_port)
+            edit.apply() //this saves configuration
+            showToast("Port Zapisany")
         }
         //UI listeners
         toolbar_back_button?.setOnClickListener{

@@ -44,7 +44,7 @@ class GrowlightModel (private var GL_URL: String, private var SET_SCHEDULE_URL: 
     fun setGrowlightSchedule(hour_on: String,hour_off: String){
         val a =  hour_on.split(":")
         val b = hour_off.split(":")
-        val req = SET_SCHEDULE_URL+"houre=${a.get(0)}&minutee=${a.get(1)}&hourn=${b.get(0)}&minuten=${b.get(1)}"
+        val req = SET_SCHEDULE_URL+"h_on=${a.get(0)}&m_on=${a.get(1)}&h_off=${b.get(0)}&m_off=${b.get(1)}"
         val request = Request.Builder().url(req).build()
         client.newCall(request).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {

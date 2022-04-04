@@ -89,9 +89,9 @@ class DeviceDetailsActivity : AppCompatActivity() {
                         wait_for_data.invokeOnCompletion {
                             runOnUiThread {
                                 //update crontab time table inside text input
-                                val a = api.getGrowlight().getSchedule()?.replace("pigs w 12 0","")?.split(" ")
-                                val ton = a?.get(1)!!.trim()+":"+ a.get(0).trim()
-                                val tof = a.get(6).trim()+":"+ a.get(5).trim()
+                                val a = api.getGrowlight().getSchedule()?.split(";")
+                                val ton = a?.get(1)!!+":"+ a.get(0)
+                                val tof = a.get(3)+":"+ a.get(2)
                                 schedule_from_input.setText(ton)
                                 schedule_untill_input.setText(tof)
                             }

@@ -11,15 +11,15 @@ import okhttp3.internal.notify
 
 class GrowboxApi(shared: SharedPreferences) {
     //constructor of this class loads server addresses and paths from global settings
-    var DHT2_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("DHT2_URL" , "/" )}"
-    var DHT_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("DHT_URL" , "/" )}"
-    var DST_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("DST_URL" , "/" )}"
-    var EXH_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("EXH_URL" , "/" )}"
-    var GET_SCHEDULE_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("GET_SCHEDULE_URL" , "/" )}"
-    var GL_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("GL_URL" , "/" )}"
-    var SERVER_INFO = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("SERVER_INFO" , "/" )}"
-    var SET_SCHEDULE_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("SET_SCHEDULE_URL" , "/" )}"
-    var DAY_AVERAGE_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}${shared.getString("DAY_AVERAGE_URL" , "/" )}"
+    var DHT2_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}:${shared.getString("PORT" , "6969" )}${shared.getString("DHT2_URL" , "/" )}"
+    var DHT_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}:${shared.getString("PORT" , "6969" )}${shared.getString("DHT_URL" , "/" )}"
+    var DST_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}:${shared.getString("PORT" , "6969" )}${shared.getString("DST_URL" , "/" )}"
+    var EXH_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}:${shared.getString("PORT" , "6969" )}${shared.getString("EXH_URL" , "/" )}"
+    var GET_SCHEDULE_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}:${shared.getString("PORT" , "6969" )}${shared.getString("GET_SCHEDULE_URL" , "/" )}"
+    var GL_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}:${shared.getString("PORT" , "6969" )}${shared.getString("GL_URL" , "/" )}"
+    var SERVER_INFO = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}:${shared.getString("PORT" , "6969" )}${shared.getString("SERVER_INFO" , "/" )}"
+    var SET_SCHEDULE_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}:${shared.getString("PORT" , "6969" )}${shared.getString("SET_SCHEDULE_URL" , "/" )}"
+    var DAY_AVERAGE_URL = "http://${shared.getString("ADDRESS" , "0.0.0.0" )}:${shared.getString("PORT" , "6969" )}${shared.getString("DAY_AVERAGE_URL" , "/" )}"
 
     //local variables declarations
     private var dst:DstModel? = null
