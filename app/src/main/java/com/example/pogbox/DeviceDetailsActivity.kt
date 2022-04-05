@@ -71,12 +71,10 @@ class DeviceDetailsActivity : AppCompatActivity() {
                     api.getGrowlight().setGrowlightSchedule(ton,tof)
                     showToast("Harmonogram wysłany")
                 }
-                //Start ui refreshing coroutines
+                //Start ui setup coroutines
                 //crontab data
                 CoroutineScope(Dispatchers.IO).launch {
-                    while (isActive){
                         //wait for api data to come
-
                           val wait_for_data = CoroutineScope(Dispatchers.IO).launch {
                                 while (isActive){
                                     api.getGrowlight().getSchedule()?.let {
@@ -94,11 +92,9 @@ class DeviceDetailsActivity : AppCompatActivity() {
                                 val tof = a.get(3)+":"+ a.get(2)
                                 schedule_from_input.setText(ton)
                                 schedule_untill_input.setText(tof)
+
                             }
                         }
-
-                        delay(500)
-                    }
                 }
                 //growlight state
                 CoroutineScope(Dispatchers.IO).launch {
